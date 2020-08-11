@@ -17,8 +17,9 @@ namespace BugTrackingSystem
             InitializeComponent();            
         }
 
-        List<Project> projects = new List<Project>();
-        private void button1_Click(object sender, EventArgs e)
+        List<Project> projects = new List<Project>();        
+
+        private void bnAddProject_Click(object sender, EventArgs e)
         {
             Project project = new Project(tbProjectName.Text);
             projects.Add(project);
@@ -26,16 +27,6 @@ namespace BugTrackingSystem
             cbProjectName.Items.Add(project.Name);
             tbProjectName.Clear();
         }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            foreach (Project project in projects)
-            {
-                tbList.Clear();
-                tbList.Text += project.Name + '\r' +'\n';
-            }
-        }
-
         private void bnDeleteProject_Click(object sender, EventArgs e)
         {
             foreach (Project project in projects)
@@ -47,6 +38,15 @@ namespace BugTrackingSystem
                     cbProjectName.Items.Remove(project.Name);
                     break;
                 }
+            }
+        }
+
+        private void bnGetProjects_Click(object sender, EventArgs e)
+        {
+            tbList.Clear();
+            foreach (Project project in projects)
+            {                
+                tbList.Text += project.Name + '\r' + '\n';
             }
         }
     }

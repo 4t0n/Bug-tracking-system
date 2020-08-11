@@ -78,7 +78,7 @@
             this.bnAddProject.TabIndex = 2;
             this.bnAddProject.Text = "Добавить";
             this.bnAddProject.UseVisualStyleBackColor = true;
-            this.bnAddProject.Click += new System.EventHandler(this.button1_Click);
+            this.bnAddProject.Click += new System.EventHandler(this.bnAddProject_Click);
             // 
             // bnDeleteProject
             // 
@@ -170,7 +170,7 @@
             this.bnGetProjects.TabIndex = 12;
             this.bnGetProjects.Text = "Список проектов";
             this.bnGetProjects.UseVisualStyleBackColor = true;
-            this.bnGetProjects.Click += new System.EventHandler(this.button8_Click);
+            this.bnGetProjects.Click += new System.EventHandler(this.bnGetProjects_Click);
             // 
             // bnGetTasksInProject
             // 
