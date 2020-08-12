@@ -117,8 +117,11 @@ namespace BugTrackingSystemWithExcel
                 projectSheet.Cells[i - 1, 2] = forYac2Pos.Text;
                 i++;
             }
-
-            //Нумерация проектов
+            if (i==5)
+            {
+                projectSheet.Cells[2, 1] = 1;
+            }
+            //Нумерация проектов            
             i = 3;            
             Excel.Range forYac = projectSheet.Cells[i, 1] as Excel.Range;
             projectSheet.Cells.EntireColumn.AutoFit();                        
@@ -152,7 +155,7 @@ namespace BugTrackingSystemWithExcel
                 }
                 arr[i-2] = "№ " + forSel1.Text + " " + forSel2.Text;
                 i++;                
-            }
+            }            
             return arr;
         }
 
@@ -222,7 +225,10 @@ namespace BugTrackingSystemWithExcel
                 userSheet.Cells[i - 1, 2] = forYac2Pos.Text;
                 i++;
             }
-
+            if (i == 5)
+            {
+                userSheet.Cells[2, 1] = 1;
+            }
             //Нумерация пользователей
             i = 3;
             Excel.Range forYac = userSheet.Cells[i, 1] as Excel.Range;
