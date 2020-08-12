@@ -30,7 +30,18 @@ namespace BugTrackingSystemWithExcel
             userSheet.Name = "Пользователи";
             projectSheet.Cells[1, 1] = "№";
             projectSheet.Cells[1, 2] = "Название проекта";
+            userSheet.Cells[1, 1] = "№";
+            userSheet.Cells[1, 2] = "Имя";
+            taskSheet.Cells[1, 1] = "№";
+            taskSheet.Cells[1, 2] = "Проект";
+            taskSheet.Cells[1, 3] = "Тема";
+            taskSheet.Cells[1, 4] = "Тип";
+            taskSheet.Cells[1, 5] = "Приоритет";
+            taskSheet.Cells[1, 6] = "Исполнитель";
+            taskSheet.Cells[1, 7] = "Описание";
             projectSheet.Cells.EntireColumn.AutoFit();
+            userSheet.Cells.EntireColumn.AutoFit();
+            taskSheet.Cells.EntireColumn.AutoFit();
         }
 
         public void SaveOpenFile()
@@ -43,7 +54,7 @@ namespace BugTrackingSystemWithExcel
             ex.Visible = true;
         }
 
-        public string AddCell(string tbProjectName)
+        public string AddCellProject(string tbProjectName)
         {
             //Добавление номера и названия проекта, вставка в cbProjectSelect
             int i = 2;
@@ -72,7 +83,7 @@ namespace BugTrackingSystemWithExcel
             }                       
         }
 
-        public void DeleteCell(int cbProjectIndex)
+        public void DeleteCellProject(int cbProjectIndex)
         {
             //Удаление проекта и смещение оставшихся вверх
             int i = 2;
@@ -120,7 +131,7 @@ namespace BugTrackingSystemWithExcel
             }                       
         }
 
-        public string[] CombBList(int cbCount)
+        public string[] CombBListProject(int cbCount)
         {
             //Перезаполнение cbProjectSelect
             int i = 2;
@@ -141,6 +152,237 @@ namespace BugTrackingSystemWithExcel
                 }
                 arr[i-2] = "№ " + forSel1.Text + " " + forSel2.Text;
                 i++;                
+            }
+            return arr;
+        }
+
+
+
+
+        public string AddCellUser(string tbUserName)
+        {
+            //Добавление номера и имени пользователя, вставка в cbUserSelect
+            int i = 2;
+            Excel.Range forSel1 = userSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forSel2 = userSheet.Cells[i, 2] as Excel.Range;
+            Excel.Range forYac = userSheet.Cells[i, 1] as Excel.Range;
+            userSheet.Cells.EntireColumn.AutoFit();
+            if (forYac.Text == String.Empty)
+            {
+                userSheet.Cells[i, 1] = i - 1;
+                userSheet.Cells[i, 2] = tbUserName;
+                return "№ " + forSel1.Text + " " + forSel2.Text;
+            }
+            else
+            {
+                while (forYac.Text != String.Empty)
+                {
+                    forYac = userSheet.Cells[i, 1] as Excel.Range;
+                    forSel1 = userSheet.Cells[i, 1] as Excel.Range;
+                    forSel2 = userSheet.Cells[i, 2] as Excel.Range;
+                    i++;
+                }
+                userSheet.Cells[i - 1, 1] = i - 2;
+                userSheet.Cells[i - 1, 2] = tbUserName;
+                return "№ " + forSel1.Text + " " + forSel2.Text;
+            }
+        }
+
+        public void DeleteCellUser(int cbUserIndex)
+        {
+            //Удаление пользователя и смещение оставшихся вверх
+            int i = 2;
+            Excel.Range forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+            while (forYac1.Text != Convert.ToString(cbUserIndex + 1))
+            {
+                forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+                forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+                i++;
+            }
+            forYac1.Clear();
+            forYac2.Clear();
+
+            //Смещение вверх
+            if (i == 2)
+            {
+                i++;
+            }
+            forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+            forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+            Excel.Range forYac1Pos = userSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forYac2Pos = userSheet.Cells[i, 2] as Excel.Range;
+            while (forYac1.Text != String.Empty)
+            {
+                forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+                forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+                forYac1Pos = forYac1;
+                forYac2Pos = forYac2;
+                userSheet.Cells[i - 1, 1] = forYac1Pos.Text;
+                userSheet.Cells[i - 1, 2] = forYac2Pos.Text;
+                i++;
+            }
+
+            //Нумерация пользователей
+            i = 3;
+            Excel.Range forYac = userSheet.Cells[i, 1] as Excel.Range;
+            userSheet.Cells.EntireColumn.AutoFit();
+
+            while (forYac.Text != String.Empty)
+            {
+                forYac = userSheet.Cells[i, 1] as Excel.Range;
+                i++;
+                userSheet.Cells[i - 2, 1] = i - 3;
+            }
+        }
+
+        public string[] CombBListUser(int cbCount)
+        {
+            //Перезаполнение cbUserSelect
+            int i = 2;
+            string[] arr = new string[cbCount];
+            Excel.Range forSel1 = userSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forSel2 = userSheet.Cells[i, 2] as Excel.Range;
+            Excel.Range forYac = userSheet.Cells[i, 1] as Excel.Range;
+            userSheet.Cells.EntireColumn.AutoFit();
+
+            while (forYac.Text != String.Empty)
+            {
+                forYac = userSheet.Cells[i, 1] as Excel.Range;
+                forSel1 = userSheet.Cells[i, 1] as Excel.Range;
+                forSel2 = userSheet.Cells[i, 2] as Excel.Range;
+                if (forSel1.Text == String.Empty)
+                {
+                    break;
+                }
+                arr[i - 2] = "№ " + forSel1.Text + " " + forSel2.Text;
+                i++;
+            }
+            return arr;
+        }
+
+
+
+
+        public string AddCellTask(string cbTaskProject, string tbTaskTheme, string tbTaskType, string tbTaskPriority, string cbTaskUser, string tbTaskDescription)
+        {
+            //Добавление номера и имени пользователя, вставка в cbTaskSelect
+            int i = 2;
+            Excel.Range forSel1 = taskSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forSel2 = taskSheet.Cells[i, 2] as Excel.Range;
+            Excel.Range forSel3 = taskSheet.Cells[i, 3] as Excel.Range;
+            Excel.Range forSel4 = taskSheet.Cells[i, 4] as Excel.Range;
+            Excel.Range forSel5 = taskSheet.Cells[i, 5] as Excel.Range;
+            Excel.Range forSel6 = taskSheet.Cells[i, 6] as Excel.Range;
+            Excel.Range forSel7 = taskSheet.Cells[i, 7] as Excel.Range;
+            Excel.Range forYac = taskSheet.Cells[i, 1] as Excel.Range;
+            taskSheet.Cells.EntireColumn.AutoFit();
+            if (forYac.Text == String.Empty)
+            {
+                taskSheet.Cells[i, 1] = i - 1;
+                taskSheet.Cells[i, 2] = cbTaskProject;
+                taskSheet.Cells[i, 3] = tbTaskTheme;
+                taskSheet.Cells[i, 4] = tbTaskType;
+                taskSheet.Cells[i, 5] = tbTaskPriority;
+                taskSheet.Cells[i, 6] = cbTaskUser;
+                taskSheet.Cells[i, 7] = tbTaskDescription;                
+                return "№" + forSel1.Text + " " + forSel2.Text + " " + forSel3.Text + " " + forSel4.Text + " " + forSel5.Text + " " + forSel6.Text + " " + forSel7.Text;
+            }
+            else
+            {
+                while (forYac.Text != String.Empty)
+                {
+                    forYac = taskSheet.Cells[i, 1] as Excel.Range;
+                    forSel1 = taskSheet.Cells[i, 1] as Excel.Range;
+                    forSel2 = taskSheet.Cells[i, 2] as Excel.Range;
+                    forSel3 = taskSheet.Cells[i, 3] as Excel.Range;
+                    forSel4 = taskSheet.Cells[i, 4] as Excel.Range;
+                    forSel5 = taskSheet.Cells[i, 5] as Excel.Range;
+                    forSel6 = taskSheet.Cells[i, 6] as Excel.Range;
+                    forSel7 = taskSheet.Cells[i, 6] as Excel.Range;
+                    i++;
+                }
+                taskSheet.Cells[i - 1, 1] = i - 2;
+                taskSheet.Cells[i - 1, 2] = cbTaskProject;
+                taskSheet.Cells[i - 1, 3] = tbTaskTheme;
+                taskSheet.Cells[i - 1, 4] = tbTaskType;
+                taskSheet.Cells[i - 1, 5] = tbTaskPriority;
+                taskSheet.Cells[i - 1, 6] = cbTaskUser;
+                taskSheet.Cells[i - 1, 7] = tbTaskDescription;                
+                return "№" + forSel1.Text + " " + forSel2.Text + " " + forSel3.Text + " " + forSel4.Text + " " + forSel5.Text + " " + forSel6.Text + " " + forSel7.Text;
+            }
+            
+        }
+
+        public void DeleteCellTask(int cbUserIndex)
+        {
+            //Удаление пользователя и смещение оставшихся вверх
+            int i = 2;
+            Excel.Range forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+            while (forYac1.Text != Convert.ToString(cbUserIndex + 1))
+            {
+                forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+                forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+                i++;
+            }
+            forYac1.Clear();
+            forYac2.Clear();
+
+            //Смещение вверх
+            if (i == 2)
+            {
+                i++;
+            }
+            forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+            forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+            Excel.Range forYac1Pos = userSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forYac2Pos = userSheet.Cells[i, 2] as Excel.Range;
+            while (forYac1.Text != String.Empty)
+            {
+                forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+                forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+                forYac1Pos = forYac1;
+                forYac2Pos = forYac2;
+                userSheet.Cells[i - 1, 1] = forYac1Pos.Text;
+                userSheet.Cells[i - 1, 2] = forYac2Pos.Text;
+                i++;
+            }
+
+            //Нумерация пользователей
+            i = 3;
+            Excel.Range forYac = userSheet.Cells[i, 1] as Excel.Range;
+            taskSheet.Cells.EntireColumn.AutoFit();
+
+            while (forYac.Text != String.Empty)
+            {
+                forYac = userSheet.Cells[i, 1] as Excel.Range;
+                i++;
+                userSheet.Cells[i - 2, 1] = i - 3;
+            }
+        }
+
+        public string[] CombBListTask(int cbCount)
+        {
+            //Перезаполнение cbUserSelect
+            int i = 2;
+            string[] arr = new string[cbCount];
+            Excel.Range forSel1 = userSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forSel2 = userSheet.Cells[i, 2] as Excel.Range;
+            Excel.Range forYac = userSheet.Cells[i, 1] as Excel.Range;
+            taskSheet.Cells.EntireColumn.AutoFit();
+
+            while (forYac.Text != String.Empty)
+            {
+                forYac = userSheet.Cells[i, 1] as Excel.Range;
+                forSel1 = userSheet.Cells[i, 1] as Excel.Range;
+                forSel2 = userSheet.Cells[i, 2] as Excel.Range;
+                if (forSel1.Text == String.Empty)
+                {
+                    break;
+                }
+                arr[i - 2] = "№ " + forSel1.Text + " " + forSel2.Text;
+                i++;
             }
             return arr;
         }
