@@ -74,6 +74,7 @@ namespace BugTrackingSystemWithExcel
 
         public void DeleteCell(int cbProjectIndex)
         {
+            //Удаление проекта и смещение оставшихся вверх
             int i = 2;
             Excel.Range forYac1 = projectSheet.Cells[i, 1] as Excel.Range;
             Excel.Range forYac2 = projectSheet.Cells[i, 2] as Excel.Range;
@@ -85,6 +86,12 @@ namespace BugTrackingSystemWithExcel
             }
             forYac1.Clear();
             forYac2.Clear();
+            
+            //Смещение вверх
+            if (i == 2)
+            {
+                i++;
+            }
             forYac1 = projectSheet.Cells[i, 1] as Excel.Range;
             forYac2 = projectSheet.Cells[i, 2] as Excel.Range;
             Excel.Range forYac1Pos = projectSheet.Cells[i, 1] as Excel.Range;
@@ -98,7 +105,44 @@ namespace BugTrackingSystemWithExcel
                 projectSheet.Cells[i - 1, 1] = forYac1Pos.Text;
                 projectSheet.Cells[i - 1, 2] = forYac2Pos.Text;
                 i++;
-            }            
+            }
+
+            //Нумерация проектов
+            i = 3;            
+            Excel.Range forYac = projectSheet.Cells[i, 1] as Excel.Range;
+            projectSheet.Cells.EntireColumn.AutoFit();                        
+            
+            while (forYac.Text != String.Empty)
+            {
+                forYac = projectSheet.Cells[i, 1] as Excel.Range;                
+                i++;
+                projectSheet.Cells[i - 2, 1] = i - 3;
+            }                       
+        }
+
+        public string[] CombBList(int cbCount)
+        {
+            //Перезаполнение cbProjectSelect
+            int i = 2;
+            string[] arr = new string[cbCount];
+            Excel.Range forSel1 = projectSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forSel2 = projectSheet.Cells[i, 2] as Excel.Range;
+            Excel.Range forYac = projectSheet.Cells[i, 1] as Excel.Range;
+            projectSheet.Cells.EntireColumn.AutoFit();
+
+            while (forYac.Text != String.Empty)
+            {
+                forYac = projectSheet.Cells[i, 1] as Excel.Range;
+                forSel1 = projectSheet.Cells[i, 1] as Excel.Range;
+                forSel2 = projectSheet.Cells[i, 2] as Excel.Range;
+                if (forSel1.Text == String.Empty)
+                {
+                    break;
+                }
+                arr[i-2] = "№ " + forSel1.Text + " " + forSel2.Text;
+                i++;                
+            }
+            return arr;
         }
     }
 }

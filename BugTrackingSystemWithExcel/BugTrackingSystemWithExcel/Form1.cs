@@ -29,7 +29,10 @@ namespace BugTrackingSystemWithExcel
         }
         private void bnDeleteProject_Click(object sender, EventArgs e)
         {
+            int cbCount = cbProjectSelect.Items.Count;
             excelMod.DeleteCell(cbProjectSelect.SelectedIndex);
+            cbProjectSelect.Items.Clear();
+            cbProjectSelect.Items.AddRange(excelMod.CombBList(cbCount-1));            
         }
 
         private void bnCreateFile_Click(object sender, EventArgs e)
