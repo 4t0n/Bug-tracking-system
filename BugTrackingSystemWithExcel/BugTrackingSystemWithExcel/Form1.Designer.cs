@@ -376,6 +376,7 @@
             this.bnGetTasksInProject.TabIndex = 10;
             this.bnGetTasksInProject.Text = "Список задач в проекте";
             this.bnGetTasksInProject.UseVisualStyleBackColor = true;
+            this.bnGetTasksInProject.Click += new System.EventHandler(this.bnGetTasksInProject_Click);
             // 
             // bnGetTaskOfUser
             // 
@@ -385,6 +386,7 @@
             this.bnGetTaskOfUser.TabIndex = 11;
             this.bnGetTaskOfUser.Text = "Список задач на исполнителе";
             this.bnGetTaskOfUser.UseVisualStyleBackColor = true;
+            this.bnGetTaskOfUser.Click += new System.EventHandler(this.bnGetTaskOfUser_Click);
             // 
             // cbTasksInProject
             // 

@@ -496,8 +496,7 @@ namespace BugTrackingSystemWithExcel
             List<string> users = new List<string>();
             int i = 2;
             Excel.Range forYac1 = userSheet.Cells[i, 1] as Excel.Range;
-            Excel.Range forYac2 = userSheet.Cells[i, 2] as Excel.Range;
-            userSheet.Cells.EntireColumn.AutoFit();            
+            Excel.Range forYac2 = userSheet.Cells[i, 2] as Excel.Range;                        
             while (forYac1.Text != String.Empty)
             {
                 forYac1 = userSheet.Cells[i, 1] as Excel.Range;
@@ -514,8 +513,7 @@ namespace BugTrackingSystemWithExcel
             List<string> projects = new List<string>();
             int i = 2;
             Excel.Range forYac1 = projectSheet.Cells[i, 1] as Excel.Range;
-            Excel.Range forYac2 = projectSheet.Cells[i, 2] as Excel.Range;
-            projectSheet.Cells.EntireColumn.AutoFit();
+            Excel.Range forYac2 = projectSheet.Cells[i, 2] as Excel.Range;            
             while (forYac1.Text != String.Empty)
             {
                 forYac1 = projectSheet.Cells[i, 1] as Excel.Range;
@@ -524,6 +522,68 @@ namespace BugTrackingSystemWithExcel
                 i++;
             }
             return projects;
+        }
+
+        //Список задач в проекте
+
+        public List<string> getTaskInProject(string cbTaskInProject)
+        {
+            List<string> tasks = new List<string>();
+            int i = 2;
+            Excel.Range forYac1 = taskSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forYac2 = taskSheet.Cells[i, 2] as Excel.Range;
+            Excel.Range forYac3 = taskSheet.Cells[i, 3] as Excel.Range;
+            Excel.Range forYac4 = taskSheet.Cells[i, 4] as Excel.Range;
+            Excel.Range forYac5 = taskSheet.Cells[i, 5] as Excel.Range;
+            Excel.Range forYac6 = taskSheet.Cells[i, 6] as Excel.Range;
+            Excel.Range forYac7 = taskSheet.Cells[i, 7] as Excel.Range;
+            while (forYac2.Text != String.Empty)
+            {
+                forYac1 = taskSheet.Cells[i, 1] as Excel.Range;
+                forYac2 = taskSheet.Cells[i, 2] as Excel.Range;
+                forYac3 = taskSheet.Cells[i, 3] as Excel.Range;
+                forYac4 = taskSheet.Cells[i, 4] as Excel.Range;
+                forYac5 = taskSheet.Cells[i, 5] as Excel.Range;
+                forYac6 = taskSheet.Cells[i, 6] as Excel.Range;
+                forYac7 = taskSheet.Cells[i, 7] as Excel.Range;
+                if (forYac2.Text == cbTaskInProject)
+                {
+                    tasks.Add(forYac1.Text + "    " + forYac2.Text + "    " + forYac3.Text + "    " + forYac4.Text + "    " + forYac5.Text + "    " + forYac6.Text + "    " + forYac7.Text);
+                }                
+                i++;
+            }
+            return tasks;
+        }
+
+        //Список задач на исполнителе
+
+        public List<string> getTaskOnUsers(string cbTaskOnUsers)
+        {
+            List<string> tasks = new List<string>();
+            int i = 2;
+            Excel.Range forYac1 = taskSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forYac2 = taskSheet.Cells[i, 2] as Excel.Range;
+            Excel.Range forYac3 = taskSheet.Cells[i, 3] as Excel.Range;
+            Excel.Range forYac4 = taskSheet.Cells[i, 4] as Excel.Range;
+            Excel.Range forYac5 = taskSheet.Cells[i, 5] as Excel.Range;
+            Excel.Range forYac6 = taskSheet.Cells[i, 6] as Excel.Range;
+            Excel.Range forYac7 = taskSheet.Cells[i, 7] as Excel.Range;
+            while (forYac6.Text != String.Empty)
+            {
+                forYac1 = taskSheet.Cells[i, 1] as Excel.Range;
+                forYac2 = taskSheet.Cells[i, 2] as Excel.Range;
+                forYac3 = taskSheet.Cells[i, 3] as Excel.Range;
+                forYac4 = taskSheet.Cells[i, 4] as Excel.Range;
+                forYac5 = taskSheet.Cells[i, 5] as Excel.Range;
+                forYac6 = taskSheet.Cells[i, 6] as Excel.Range;
+                forYac7 = taskSheet.Cells[i, 7] as Excel.Range;
+                if (forYac6.Text == cbTaskOnUsers)
+                {
+                    tasks.Add(forYac1.Text + "    " + forYac2.Text + "    " + forYac3.Text + "    " + forYac4.Text + "    " + forYac5.Text + "    " + forYac6.Text + "    " + forYac7.Text);
+                }
+                i++;
+            }
+            return tasks;
         }
     }
 }

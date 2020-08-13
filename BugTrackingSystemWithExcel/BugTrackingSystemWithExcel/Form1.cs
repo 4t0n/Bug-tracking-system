@@ -39,6 +39,7 @@ namespace BugTrackingSystemWithExcel
             string ProjectName = excelMod.AddCellProject(Convert.ToString(tbProjectName.Text));
             cbProjectSelect.Items.Add(ProjectName);
             cbTaskProject.Items.Add(ProjectName);
+            cbTasksInProject.Items.Add(ProjectName);
             tbProjectName.Clear();
         }
         //Удаление проекта
@@ -49,8 +50,10 @@ namespace BugTrackingSystemWithExcel
             int cbCountTaskSelect = excelMod.DeleteCellProject(cbProjectSelect.SelectedIndex);
             cbProjectSelect.Items.Clear();
             cbTaskProject.Items.Clear();
+            cbTasksInProject.Items.Clear();
             cbTaskSelect.Items.Clear();
             cbProjectSelect.Items.AddRange(excelMod.CombBListProject(cbCount-1));
+            cbTasksInProject.Items.AddRange(excelMod.CombBListProject(cbCount - 1));
             cbTaskProject.Items.AddRange(excelMod.CombBListProject(cbCount - 1));
             cbTaskSelect.Items.AddRange(excelMod.CombBListTask(cbCountTask - cbCountTaskSelect));
         }
@@ -60,6 +63,7 @@ namespace BugTrackingSystemWithExcel
         {
             string UserName = excelMod.AddCellUser(Convert.ToString(tbUserName.Text));
             cbUserSelect.Items.Add(UserName);
+            cbTaskOfUsers.Items.Add(UserName);
             cbTaskUser.Items.Add(UserName);
             tbUserName.Clear();
         }
@@ -70,9 +74,11 @@ namespace BugTrackingSystemWithExcel
             int cbCountTask = cbTaskSelect.Items.Count;
             int cbCountTaskSelect = excelMod.DeleteCellUser(cbUserSelect.SelectedIndex);            
             cbUserSelect.Items.Clear();
+            cbTaskOfUsers.Items.Clear();
             cbTaskUser.Items.Clear();
             cbTaskSelect.Items.Clear();
             cbUserSelect.Items.AddRange(excelMod.CombBListUser(cbCount - 1));
+            cbTaskOfUsers.Items.AddRange(excelMod.CombBListProject(cbCount - 1));
             cbTaskUser.Items.AddRange(excelMod.CombBListUser(cbCount - 1));
             cbTaskSelect.Items.AddRange(excelMod.CombBListTask(cbCountTask - cbCountTaskSelect));
         }
@@ -110,6 +116,26 @@ namespace BugTrackingSystemWithExcel
             for (int i = 0; i < excelMod.getProjects().Count; i++)
             {
                 tbList.Text += Convert.ToString(excelMod.getProjects()[i]) + Environment.NewLine;
+            }
+        }
+
+        private void bnGetTasksInProject_Click(object sender, EventArgs e)
+        {
+            tbList.Clear();
+            tbList.Text = "СПИСОК ЗАДАЧ В ПРОЕКТЕ" + Environment.NewLine + "№   Название проекта" + Environment.NewLine;
+            for (int i = 0; i < excelMod.getTaskInProject(Convert.ToString(cbTasksInProject.SelectedItem)).Count; i++)
+            {
+                tbList.Text += Convert.ToString(excelMod.getTaskInProject(Convert.ToString(cbTasksInProject.SelectedItem))[i]) + Environment.NewLine;
+            }
+        }
+
+        private void bnGetTaskOfUser_Click(object sender, EventArgs e)
+        {
+            tbList.Clear();
+            tbList.Text = "СПИСОК ЗАДАЧ НА ИСПОЛНИТЕЛЕ" + Environment.NewLine + "№   Название проекта" + Environment.NewLine;
+            for (int i = 0; i < excelMod.getTaskOnUsers(Convert.ToString(cbTaskOfUsers.SelectedItem)).Count; i++)
+            {
+                tbList.Text += Convert.ToString(excelMod.getTaskOnUsers(Convert.ToString(cbTaskOfUsers.SelectedItem))[i]) + Environment.NewLine;
             }
         }
     }
