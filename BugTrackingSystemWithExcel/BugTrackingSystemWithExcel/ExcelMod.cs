@@ -54,6 +54,8 @@ namespace BugTrackingSystemWithExcel
             ex.Visible = true;
         }
 
+
+        //БЛОК РАБОТЫ С ПРОЕКТАМИ
         public string AddCellProject(string tbProjectName)
         {
             //Добавление номера и названия проекта, вставка в cbProjectSelect
@@ -95,6 +97,22 @@ namespace BugTrackingSystemWithExcel
                 forYac2 = projectSheet.Cells[i, 2] as Excel.Range;
                 i++;
             }
+
+            int j = 2;            
+            Excel.Range forYacTask2 = taskSheet.Cells[j, 2] as Excel.Range;            
+            while (forYacTask2.Text != String.Empty)
+            {                
+                forYacTask2 = taskSheet.Cells[j, 2] as Excel.Range;             
+                
+                if (forYacTask2.Text == "№ " + forYac1.Text + " " + forYac2.Text)
+                {
+                    DeleteCellTask(j - 2);
+                    j--;
+                }
+                j++;
+            }
+
+
             forYac1.Clear();
             forYac2.Clear();
             
@@ -160,7 +178,7 @@ namespace BugTrackingSystemWithExcel
         }
 
 
-
+        //БЛОК РАБОТЫ С ПОЛЬЗОВАТЕЛЯМИ
 
         public string AddCellUser(string tbUserName)
         {
@@ -268,11 +286,11 @@ namespace BugTrackingSystemWithExcel
         }
 
 
-
+        //БЛОК РАБОТЫ С ЗАДАЧАМИ
 
         public string AddCellTask(string cbTaskProject, string tbTaskTheme, string tbTaskType, string tbTaskPriority, string cbTaskUser, string tbTaskDescription)
         {
-            //Добавление номера и имени пользователя, вставка в cbTaskSelect
+            //Добавление задачи с данными, вставка в cbTaskSelect
             int i = 2;
             Excel.Range forSel1 = taskSheet.Cells[i, 1] as Excel.Range;
             Excel.Range forSel2 = taskSheet.Cells[i, 2] as Excel.Range;
@@ -322,7 +340,7 @@ namespace BugTrackingSystemWithExcel
 
         public void DeleteCellTask(int cbTaskIndex)
         {
-            //Удаление пользователя и смещение оставшихся вверх
+            //Удаление задачи и смещение оставшихся вверх
             int i = 2;
             Excel.Range forYac1 = taskSheet.Cells[i, 1] as Excel.Range;
             Excel.Range forYac2 = taskSheet.Cells[i, 2] as Excel.Range;
@@ -398,7 +416,7 @@ namespace BugTrackingSystemWithExcel
             {
                 taskSheet.Cells[2, 1] = 1;
             }
-            //Нумерация пользователей
+            //Нумерация задач
             i = 3;
             Excel.Range forYac = taskSheet.Cells[i, 1] as Excel.Range;
             taskSheet.Cells.EntireColumn.AutoFit();
