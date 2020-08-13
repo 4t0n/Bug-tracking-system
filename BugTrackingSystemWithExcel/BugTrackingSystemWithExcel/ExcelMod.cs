@@ -213,7 +213,7 @@ namespace BugTrackingSystemWithExcel
             }
         }
 
-        public void DeleteCellUser(int cbUserIndex)
+        public int DeleteCellUser(int cbUserIndex)
         {
             //Удаление пользователя и смещение оставшихся вверх
             int i = 2;
@@ -225,6 +225,24 @@ namespace BugTrackingSystemWithExcel
                 forYac2 = userSheet.Cells[i, 2] as Excel.Range;
                 i++;
             }
+
+            //Проверка на наличие в задачах
+            int j = 2;
+            int countForCbProjectSelect = 0;
+            Excel.Range forYacTask2 = taskSheet.Cells[j, 2] as Excel.Range;
+            while (forYacTask2.Text != String.Empty)
+            {
+                forYacTask2 = taskSheet.Cells[j, 6] as Excel.Range;
+
+                if (forYacTask2.Text == forYac2.Text)
+                {
+                    DeleteCellTask(j - 2);
+                    j--;
+                    countForCbProjectSelect++;
+                }
+                j++;
+            }
+
             forYac1.Clear();
             forYac2.Clear();
 
@@ -262,6 +280,8 @@ namespace BugTrackingSystemWithExcel
                 i++;
                 userSheet.Cells[i - 2, 1] = i - 3;
             }
+
+            return countForCbProjectSelect;
         }
 
         public string[] CombBListUser(int cbCount)
@@ -466,6 +486,44 @@ namespace BugTrackingSystemWithExcel
                 i++;
             }
             return arr;
+        }
+
+        //БЛОК С КНОПКАМИ
+
+        //Список пользователей
+        public List<string> getUsers ()
+        {
+            List<string> users = new List<string>();
+            int i = 2;
+            Excel.Range forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+            userSheet.Cells.EntireColumn.AutoFit();            
+            while (forYac1.Text != String.Empty)
+            {
+                forYac1 = userSheet.Cells[i, 1] as Excel.Range;
+                forYac2 = userSheet.Cells[i, 2] as Excel.Range;
+                users.Add(forYac1.Text + "      " + forYac2.Text);
+                i++;
+            }            
+            return users;            
+        }
+
+        //Список проектов
+        public List<string> getProjects()
+        {
+            List<string> projects = new List<string>();
+            int i = 2;
+            Excel.Range forYac1 = projectSheet.Cells[i, 1] as Excel.Range;
+            Excel.Range forYac2 = projectSheet.Cells[i, 2] as Excel.Range;
+            projectSheet.Cells.EntireColumn.AutoFit();
+            while (forYac1.Text != String.Empty)
+            {
+                forYac1 = projectSheet.Cells[i, 1] as Excel.Range;
+                forYac2 = projectSheet.Cells[i, 2] as Excel.Range;
+                projects.Add(forYac1.Text + "      " + forYac2.Text);
+                i++;
+            }
+            return projects;
         }
     }
 }

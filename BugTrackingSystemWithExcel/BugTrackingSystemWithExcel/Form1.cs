@@ -45,13 +45,14 @@ namespace BugTrackingSystemWithExcel
         private void bnDeleteProject_Click(object sender, EventArgs e)
         {
             int cbCount = cbProjectSelect.Items.Count;
+            int cbCountTask = cbTaskSelect.Items.Count;
             int cbCountTaskSelect = excelMod.DeleteCellProject(cbProjectSelect.SelectedIndex);
             cbProjectSelect.Items.Clear();
             cbTaskProject.Items.Clear();
             cbTaskSelect.Items.Clear();
             cbProjectSelect.Items.AddRange(excelMod.CombBListProject(cbCount-1));
             cbTaskProject.Items.AddRange(excelMod.CombBListProject(cbCount - 1));
-            cbTaskSelect.Items.AddRange(excelMod.CombBListTask(cbCountTaskSelect -1));
+            cbTaskSelect.Items.AddRange(excelMod.CombBListTask(cbCountTask - cbCountTaskSelect));
         }
                 
         //Добавление пользователя
@@ -66,11 +67,14 @@ namespace BugTrackingSystemWithExcel
         private void bnDeleteUser_Click(object sender, EventArgs e)
         {
             int cbCount = cbUserSelect.Items.Count;
-            excelMod.DeleteCellUser(cbUserSelect.SelectedIndex);
+            int cbCountTask = cbTaskSelect.Items.Count;
+            int cbCountTaskSelect = excelMod.DeleteCellUser(cbUserSelect.SelectedIndex);            
             cbUserSelect.Items.Clear();
             cbTaskUser.Items.Clear();
+            cbTaskSelect.Items.Clear();
             cbUserSelect.Items.AddRange(excelMod.CombBListUser(cbCount - 1));
             cbTaskUser.Items.AddRange(excelMod.CombBListUser(cbCount - 1));
+            cbTaskSelect.Items.AddRange(excelMod.CombBListTask(cbCountTask - cbCountTaskSelect));
         }
 
 
@@ -87,6 +91,26 @@ namespace BugTrackingSystemWithExcel
             excelMod.DeleteCellTask(cbTaskSelect.SelectedIndex);
             cbTaskSelect.Items.Clear();            
             cbTaskSelect.Items.AddRange(excelMod.CombBListTask(cbCount - 1));            
+        }
+
+        private void bnGetUsers_Click(object sender, EventArgs e)
+        {
+            tbList.Clear();
+            tbList.Text = "СПИСОК ПОЛЬЗОВАТЕЛЕЙ" + Environment.NewLine + "№   Имя пользователя" + Environment.NewLine;
+            for (int i = 0; i < excelMod.getUsers().Count; i++)
+            {                
+                tbList.Text += Convert.ToString(excelMod.getUsers()[i]) + Environment.NewLine;
+            }            
+        }
+
+        private void bnGetProjects_Click(object sender, EventArgs e)
+        {
+            tbList.Clear();
+            tbList.Text = "СПИСОК ПРОЕКТОВ" + Environment.NewLine + "№   Название проекта" + Environment.NewLine;
+            for (int i = 0; i < excelMod.getProjects().Count; i++)
+            {
+                tbList.Text += Convert.ToString(excelMod.getProjects()[i]) + Environment.NewLine;
+            }
         }
     }
 }
