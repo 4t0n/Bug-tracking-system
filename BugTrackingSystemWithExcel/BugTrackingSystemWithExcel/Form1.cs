@@ -45,11 +45,13 @@ namespace BugTrackingSystemWithExcel
         private void bnDeleteProject_Click(object sender, EventArgs e)
         {
             int cbCount = cbProjectSelect.Items.Count;
-            excelMod.DeleteCellProject(cbProjectSelect.SelectedIndex);
+            int cbCountTaskSelect = excelMod.DeleteCellProject(cbProjectSelect.SelectedIndex);
             cbProjectSelect.Items.Clear();
             cbTaskProject.Items.Clear();
+            cbTaskSelect.Items.Clear();
             cbProjectSelect.Items.AddRange(excelMod.CombBListProject(cbCount-1));
             cbTaskProject.Items.AddRange(excelMod.CombBListProject(cbCount - 1));
+            cbTaskSelect.Items.AddRange(excelMod.CombBListTask(cbCountTaskSelect -1));
         }
                 
         //Добавление пользователя

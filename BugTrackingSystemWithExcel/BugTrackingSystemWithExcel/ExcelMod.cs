@@ -68,7 +68,7 @@ namespace BugTrackingSystemWithExcel
             {
                 projectSheet.Cells[i, 1] = i - 1;
                 projectSheet.Cells[i, 2] = tbProjectName;
-                return "№ " + forSel1.Text + " " + forSel2.Text;
+                return forSel2.Text;
             }
             else
             {
@@ -81,11 +81,11 @@ namespace BugTrackingSystemWithExcel
                 }
                 projectSheet.Cells[i - 1, 1] = i - 2;
                 projectSheet.Cells[i - 1, 2] = tbProjectName;
-                return "№ " + forSel1.Text + " " + forSel2.Text;
+                return forSel2.Text;
             }                       
         }
 
-        public void DeleteCellProject(int cbProjectIndex)
+        public int DeleteCellProject(int cbProjectIndex)
         {
             //Удаление проекта и смещение оставшихся вверх
             int i = 2;
@@ -98,16 +98,19 @@ namespace BugTrackingSystemWithExcel
                 i++;
             }
 
-            int j = 2;            
+            //Проверка на наличие в задачах
+            int j = 2;
+            int countForCbProjectSelect = 0;
             Excel.Range forYacTask2 = taskSheet.Cells[j, 2] as Excel.Range;            
             while (forYacTask2.Text != String.Empty)
             {                
                 forYacTask2 = taskSheet.Cells[j, 2] as Excel.Range;             
                 
-                if (forYacTask2.Text == "№ " + forYac1.Text + " " + forYac2.Text)
+                if (forYacTask2.Text == forYac2.Text)
                 {
                     DeleteCellTask(j - 2);
                     j--;
+                    countForCbProjectSelect++;
                 }
                 j++;
             }
@@ -149,7 +152,8 @@ namespace BugTrackingSystemWithExcel
                 forYac = projectSheet.Cells[i, 1] as Excel.Range;                
                 i++;
                 projectSheet.Cells[i - 2, 1] = i - 3;
-            }                       
+            }
+            return countForCbProjectSelect;
         }
 
         public string[] CombBListProject(int cbCount)
@@ -171,7 +175,7 @@ namespace BugTrackingSystemWithExcel
                 {
                     break;
                 }
-                arr[i-2] = "№ " + forSel1.Text + " " + forSel2.Text;
+                arr[i-2] = forSel2.Text;
                 i++;                
             }            
             return arr;
@@ -192,7 +196,7 @@ namespace BugTrackingSystemWithExcel
             {
                 userSheet.Cells[i, 1] = i - 1;
                 userSheet.Cells[i, 2] = tbUserName;
-                return "№ " + forSel1.Text + " " + forSel2.Text;
+                return forSel2.Text;
             }
             else
             {
@@ -205,7 +209,7 @@ namespace BugTrackingSystemWithExcel
                 }
                 userSheet.Cells[i - 1, 1] = i - 2;
                 userSheet.Cells[i - 1, 2] = tbUserName;
-                return "№ " + forSel1.Text + " " + forSel2.Text;
+                return forSel2.Text;
             }
         }
 
@@ -279,7 +283,7 @@ namespace BugTrackingSystemWithExcel
                 {
                     break;
                 }
-                arr[i - 2] = "№ " + forSel1.Text + " " + forSel2.Text;
+                arr[i - 2] = forSel2.Text;
                 i++;
             }
             return arr;
