@@ -81,7 +81,10 @@ namespace BugTrackingSystemWithExcel
         //Удаление задачи
         private void bnDeleteTask_Click(object sender, EventArgs e)
         {
-
+            int cbCount = cbTaskSelect.Items.Count;
+            excelMod.DeleteCellTask(cbTaskSelect.SelectedIndex);
+            cbTaskSelect.Items.Clear();            
+            cbTaskSelect.Items.AddRange(excelMod.CombBListTask(cbCount - 1));            
         }
     }
 }
