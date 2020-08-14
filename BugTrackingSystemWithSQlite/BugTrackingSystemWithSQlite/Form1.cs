@@ -132,5 +132,15 @@ namespace BugTrackingSystemWithSQlite
                     MessageBox.Show("Ошибка: " + ex.Message);
                 }            
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "DataBase Files(*.db;*.sdb;*.sqlite;*.db3;*.s3db;*.sqlite3;*.sl3;)|";
+            if (openFileDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+            string filename = openFileDialog.FileName;
+            dbFileName = "Data Source=" + filename + ";" + "Version=3";
+        }
     }
 }
