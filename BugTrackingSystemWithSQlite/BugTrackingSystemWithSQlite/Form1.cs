@@ -106,16 +106,19 @@ namespace BugTrackingSystemWithSQlite
             project.DeleteNameProject();
         }
 
+        //Добавить пользователя
         private void bnAddNameUser_Click(object sender, EventArgs e)
         {
             User user = new User(dbFileName, dbConnect, dbCommand);
-            user.AddNameUsers(tbUserName.Text);
+            user.AddNameUser(tbUserName.Text);
             tbUserName.Clear();
         }
         
+        //Удалить пользователя
         private void bnDeleteUser_Click(object sender, EventArgs e)
         {
-
+            User user = new User(dbFileName, dbConnect, dbCommand);
+            user.DeleteNameUser();
         }
 
         //Показать список проектов

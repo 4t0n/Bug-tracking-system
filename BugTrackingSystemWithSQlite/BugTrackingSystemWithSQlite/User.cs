@@ -26,7 +26,7 @@ namespace BugTrackingSystemWithSQlite
             this.dbCommand = dbCommand;
         }
         //Добавление строк в БД
-        public void AddNameUsers(string tbUserName)
+        public void AddNameUser(string tbUserName)
         {
             if (File.Exists(dbFileName))
             {
@@ -54,12 +54,12 @@ namespace BugTrackingSystemWithSQlite
         }
 
         //Вызов формы для удаления проекта
-        public void DeleteNameUsers()
+        public void DeleteNameUser()
         {
             if (File.Exists(dbFileName))
             {
-                FormDeleteProject formDeleteProject = new FormDeleteProject(dbFileName, dbConnect, dbCommand);
-                formDeleteProject.Show();
+                FormDeleteUser formDeleteUser = new FormDeleteUser(dbFileName, dbConnect, dbCommand);
+                formDeleteUser.Show();
             }
             else
             {
@@ -72,12 +72,22 @@ namespace BugTrackingSystemWithSQlite
         {
             string sqlQuery;
             DataTable dTable = new DataTable();
+            DataGridViewTextBoxColumn dgvUser = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn dgvIdUser = new DataGridViewTextBoxColumn();
             try
             {
                 sqlQuery = "SELECT * FROM UserList";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
                 adapter.Fill(dTable);
                 dgvViewer.Rows.Clear();
+                dgvViewer.Columns.Clear();
+                dgvUser.Name = "User";
+                dgvUser.HeaderText = "Имя пользователя";
+                dgvIdUser.Name = "idUser";
+                dgvIdUser.HeaderText = "Порядковый номер";
+                dgvIdUser.Visible = false;
+                dgvViewer.Columns.Add(dgvIdUser);
+                dgvViewer.Columns.Add(dgvUser);                
                 for (int i = 0; i < dTable.Rows.Count; i++)
                     dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
             }

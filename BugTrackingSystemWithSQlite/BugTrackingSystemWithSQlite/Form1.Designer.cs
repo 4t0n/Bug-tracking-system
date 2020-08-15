@@ -48,10 +48,6 @@
             this.bnShowUsers = new System.Windows.Forms.Button();
             this.bnShowTasksInProject = new System.Windows.Forms.Button();
             this.bnShowTasksOnUser = new System.Windows.Forms.Button();
-            this.idProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Project = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewer)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gbProjects.SuspendLayout();
@@ -61,17 +57,11 @@
             // dgvViewer
             // 
             this.dgvViewer.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvViewer.ColumnHeadersHeight = 25;
-            this.dgvViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvViewer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idProject,
-            this.Project,
-            this.idUser,
-            this.User});
+            this.dgvViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvViewer.Location = new System.Drawing.Point(16, 522);
             this.dgvViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvViewer.Name = "dgvViewer";
-            this.dgvViewer.RowHeadersWidth = 62;
+            this.dgvViewer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvViewer.Size = new System.Drawing.Size(920, 334);
             this.dgvViewer.TabIndex = 4;
             // 
@@ -281,40 +271,6 @@
             this.bnShowTasksOnUser.UseVisualStyleBackColor = true;
             this.bnShowTasksOnUser.Click += new System.EventHandler(this.bnShowTasksOnUser_Click);
             // 
-            // idProject
-            // 
-            this.idProject.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.idProject.HeaderText = "Номер";
-            this.idProject.MinimumWidth = 8;
-            this.idProject.Name = "idProject";
-            this.idProject.Visible = false;
-            this.idProject.Width = 95;
-            // 
-            // Project
-            // 
-            this.Project.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Project.HeaderText = "Наименование проекта";
-            this.Project.MinimumWidth = 8;
-            this.Project.Name = "Project";
-            this.Project.Visible = false;
-            this.Project.Width = 224;
-            // 
-            // idUser
-            // 
-            this.idUser.HeaderText = "Номер";
-            this.idUser.MinimumWidth = 8;
-            this.idUser.Name = "idUser";
-            this.idUser.Visible = false;
-            this.idUser.Width = 150;
-            // 
-            // User
-            // 
-            this.User.HeaderText = "Имя пользователя";
-            this.User.MinimumWidth = 8;
-            this.User.Name = "User";
-            this.User.Visible = false;
-            this.User.Width = 150;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -367,10 +323,6 @@
         private System.Windows.Forms.Button bnShowUsers;
         private System.Windows.Forms.Button bnShowTasksInProject;
         private System.Windows.Forms.Button bnShowTasksOnUser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idProject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Project;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idUser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn User;
     }
 }
 

@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbTitle = new System.Windows.Forms.Label();
+            this.lbTitleProject = new System.Windows.Forms.Label();
             this.cbProjectNameForDelete = new System.Windows.Forms.ComboBox();
             this.bnDeleteProject = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lbTitle
+            // lbTitleProject
             // 
-            this.lbTitle.Location = new System.Drawing.Point(18, 75);
-            this.lbTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbTitle.Name = "lbTitle";
-            this.lbTitle.Size = new System.Drawing.Size(420, 20);
-            this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "Выберите проект, который нужно удалить.";
-            this.lbTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbTitleProject.Location = new System.Drawing.Point(18, 75);
+            this.lbTitleProject.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbTitleProject.Name = "lbTitleProject";
+            this.lbTitleProject.Size = new System.Drawing.Size(420, 20);
+            this.lbTitleProject.TabIndex = 0;
+            this.lbTitleProject.Text = "Выберите проект, который нужно удалить.";
+            this.lbTitleProject.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cbProjectNameForDelete
             // 
@@ -67,10 +67,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 308);
+            this.ClientSize = new System.Drawing.Size(458, 304);
             this.Controls.Add(this.bnDeleteProject);
             this.Controls.Add(this.cbProjectNameForDelete);
-            this.Controls.Add(this.lbTitle);
+            this.Controls.Add(this.lbTitleProject);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormDeleteProject";
             this.Text = "Удаление проекта";
@@ -81,7 +81,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lbTitle;
+        private System.Windows.Forms.Label lbTitleProject;
         private System.Windows.Forms.ComboBox cbProjectNameForDelete;
         private System.Windows.Forms.Button bnDeleteProject;
     }

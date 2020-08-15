@@ -71,20 +71,30 @@ namespace BugTrackingSystemWithSQlite
         {
             string sqlQuery;
             DataTable dTable = new DataTable();
+            DataGridViewTextBoxColumn dgvIdProject = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn dgvProject = new DataGridViewTextBoxColumn();
             try
             {
                 sqlQuery = "SELECT * FROM ProjectList";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
                 adapter.Fill(dTable);
                 dgvViewer.Rows.Clear();
+                dgvViewer.Rows.Clear();
+                dgvViewer.Columns.Clear();
+                dgvProject.Name = "Project";
+                dgvProject.HeaderText = "Название проекта";
+                dgvIdProject.Name = "idProject";
+                dgvIdProject.HeaderText = "Порядковый номер";
+                dgvIdProject.Visible = false;
+                dgvViewer.Columns.Add(dgvIdProject);
+                dgvViewer.Columns.Add(dgvProject);
                 for (int i = 0; i < dTable.Rows.Count; i++)
                     dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
             }
             catch (SQLiteException ex)
             {
                 MessageBox.Show("Ошибка: " + ex.Message);
-            }
-            dgvViewer.Columns["Project"].Visible = true;
+            }            
         }
     }
 }
