@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.IO;
 using System.Diagnostics;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BugTrackingSystemWithSQlite
 {
@@ -19,7 +18,7 @@ namespace BugTrackingSystemWithSQlite
         public string dbFileName;
         public SQLiteConnection dbConnect;
         public SQLiteCommand dbCommand;
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -28,66 +27,11 @@ namespace BugTrackingSystemWithSQlite
         private void Form1_Load(object sender, EventArgs e)
         {
             dbConnect = new SQLiteConnection();
-            dbCommand = new SQLiteCommand();            
-        }        
-        
-        //Добавление строк в БД
-        private void bnAddNameProject_Click(object sender, EventArgs e)
-        {
-            string sqlQuery;
-            DataTable dTable = new DataTable();
-
-
-            if (File.Exists(dbFileName))
-            {
-                dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
-                dbConnect.Open();
-                dbCommand.Connection = dbConnect;
-
-                try
-                {
-                    dbCommand.CommandText = "INSERT INTO ProjectList ('Project') values ('" +
-                        tbProjectName.Text + "')";
-
-                    dbCommand.ExecuteNonQuery();
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Ошибка: " + ex.Message);
-                }
-
-                try
-                {
-                    sqlQuery = "SELECT * FROM ProjectList";
-                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
-                    adapter.Fill(dTable);
-
-                    if (dTable.Rows.Count > 0)
-                    {
-                        dgvViewer.Rows.Clear();
-
-                        for (int i = 0; i < dTable.Rows.Count; i++)
-                            dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
-                    }
-                    else
-                        MessageBox.Show("Данные отсутствуют");
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Ошибка: " + ex.Message);
-                }
-                //dbConnect.Close();
-            }
-            else
-            {
-                MessageBox.Show("Необходимо создать или открыть файл базы данных!");
-            }
+            dbCommand = new SQLiteCommand();
         }
-
         //Создание файла
         private void toolSpFileCreate_Click(object sender, EventArgs e)
-        {
-            string sqlQuery;
+        {            
             DataTable dTable = new DataTable();
             Stream myStream;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -100,7 +44,7 @@ namespace BugTrackingSystemWithSQlite
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if ((myStream = saveFileDialog1.OpenFile()) != null)
-                {                    
+                {
                     myStream.Close();
                     dbFileName = saveFileDialog1.FileName;
                     try
@@ -108,113 +52,98 @@ namespace BugTrackingSystemWithSQlite
                         dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
                         dbConnect.Open();
                         dbCommand.Connection = dbConnect;
-
-                        dbCommand.CommandText = "CREATE TABLE IF NOT EXISTS ProjectList (id INTEGER PRIMARY KEY AUTOINCREMENT, Project TEXT)";
-                        dbCommand.ExecuteNonQuery();                        
+                        dbCommand.CommandText = "CREATE TABLE IF NOT EXISTS ProjectList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, Project TEXT);CREATE TABLE IF NOT EXISTS UserList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, User TEXT)";
+                        dbCommand.ExecuteNonQuery();
                     }
                     catch (SQLiteException ex)
                     {
                         MessageBox.Show("Ошибка: " + ex.Message);
                     }
-                }
-            }
-            try
-            {
-                sqlQuery = "SELECT * FROM ProjectList";
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
-                adapter.Fill(dTable);
-                dgvViewer.Rows.Clear();
-                for (int i = 0; i < dTable.Rows.Count; i++)
-                    dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }
-            dbConnect.Close();
+                }                
+                dbConnect.Close();
+            }            
         }
 
         //Открыть файл
         private void toolSpFileOpen_Click(object sender, EventArgs e)
-        {
-            string sqlQuery;
+        {            
             DataTable dTable = new DataTable();
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            openFileDialog.Filter = "DataBase Files(*.db;*.sdb;*.sqlite;*.db3;*.s3db;*.sqlite3;*.sl3;)|*.db*;.sdb;*.sqlite;*.db3;*.s3db;*.sqlite3;*.sl3;";            
+            openFileDialog.Filter = "DataBase Files(*.db;*.sdb;*.sqlite;*.db3;*.s3db;*.sqlite3;*.sl3;)|*.db*;.sdb;*.sqlite;*.db3;*.s3db;*.sqlite3;*.sl3;";
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
+            {                   
                 dbFileName = openFileDialog.FileName;
                 try
                 {
                     dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
                     dbConnect.Open();
                     dbCommand.Connection = dbConnect;
-
-                    dbCommand.CommandText = "CREATE TABLE IF NOT EXISTS ProjectList (id INTEGER PRIMARY KEY AUTOINCREMENT, Project TEXT)";
+                    dbCommand.CommandText = "CREATE TABLE IF NOT EXISTS ProjectList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, Project TEXT);CREATE TABLE IF NOT EXISTS UserList (idUser INTEGER PRIMARY KEY AUTOINCREMENT, User TEXT)";
                     dbCommand.ExecuteNonQuery();
-                    
                 }
                 catch (SQLiteException ex)
                 {
                     MessageBox.Show("Ошибка: " + ex.Message);
-                }
+                }                
+                dbConnect.Close();
             }
-            try
-            {
-                sqlQuery = "SELECT * FROM ProjectList";
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
-                adapter.Fill(dTable);                
-                dgvViewer.Rows.Clear();
-                for (int i = 0; i < dTable.Rows.Count; i++)
-                    dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);                
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }
-            //dbConnect.Close();
+        }
+
+        //Добавление проекта
+        private void bnAddNameProject_Click(object sender, EventArgs e)
+        {
+            Project project = new Project(dbFileName, dbConnect, dbCommand);
+            project.AddNameProject(tbProjectName.Text);
+            tbProjectName.Clear();
         }
 
         //Удалить проект
         private void bnDeleteProject_Click(object sender, EventArgs e)
         {
-            /*string sqlQuery;
-            DataTable dTable = new DataTable();
-
-            dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
-            dbConnect.Open();
-            dbCommand.Connection = dbConnect;
-            
-
-            try
-            {
-                dbCommand.CommandText = "DELETE FROM ProjectList WHERE id = 1";
-
-                dbCommand.ExecuteNonQuery();
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }
-
-            try
-            {
-                sqlQuery = "SELECT * FROM ProjectList";
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
-                adapter.Fill(dTable);
-                dgvViewer.Rows.Clear();
-                for (int i = 0; i < dTable.Rows.Count; i++)
-                    dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }*/
-
-            FormDeleteProject formDeleteProject = new FormDeleteProject();
-            formDeleteProject.Show();
+            Project project = new Project(dbFileName, dbConnect, dbCommand);
+            project.DeleteNameProject();
         }
+
+        private void bnAddNameUser_Click(object sender, EventArgs e)
+        {
+            User user = new User(dbFileName, dbConnect, dbCommand);
+            user.AddNameUsers(tbUserName.Text);
+            tbUserName.Clear();
+        }
+        
+        private void bnDeleteUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Показать список проектов
+        private void bnShowProjects_Click(object sender, EventArgs e)
+        {
+            Project project = new Project(dbFileName, dbConnect, dbCommand);
+            project.ShowProjects(dgvViewer);
+        }
+
+        //Показать список пользователей
+        private void bnShowUsers_Click(object sender, EventArgs e)
+        {
+            User user = new User(dbFileName, dbConnect, dbCommand);
+            user.ShowUsers(dgvViewer);
+        }
+
+        //Показать список задач в проекте
+        private void bnShowTasksInProject_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Показать список задач на исполнителе
+        private void bnShowTasksOnUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }    
 }

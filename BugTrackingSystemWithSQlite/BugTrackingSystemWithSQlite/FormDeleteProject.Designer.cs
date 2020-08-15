@@ -35,9 +35,10 @@
             // 
             // lbTitle
             // 
-            this.lbTitle.Location = new System.Drawing.Point(12, 49);
+            this.lbTitle.Location = new System.Drawing.Point(18, 75);
+            this.lbTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTitle.Name = "lbTitle";
-            this.lbTitle.Size = new System.Drawing.Size(280, 13);
+            this.lbTitle.Size = new System.Drawing.Size(420, 20);
             this.lbTitle.TabIndex = 0;
             this.lbTitle.Text = "Выберите проект, который нужно удалить.";
             this.lbTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -45,30 +46,35 @@
             // cbProjectNameForDelete
             // 
             this.cbProjectNameForDelete.FormattingEnabled = true;
-            this.cbProjectNameForDelete.Location = new System.Drawing.Point(15, 91);
+            this.cbProjectNameForDelete.Location = new System.Drawing.Point(22, 140);
+            this.cbProjectNameForDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbProjectNameForDelete.Name = "cbProjectNameForDelete";
-            this.cbProjectNameForDelete.Size = new System.Drawing.Size(277, 21);
+            this.cbProjectNameForDelete.Size = new System.Drawing.Size(414, 28);
             this.cbProjectNameForDelete.TabIndex = 1;
             // 
             // bnDeleteProject
             // 
-            this.bnDeleteProject.Location = new System.Drawing.Point(113, 146);
+            this.bnDeleteProject.Location = new System.Drawing.Point(170, 225);
+            this.bnDeleteProject.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnDeleteProject.Name = "bnDeleteProject";
-            this.bnDeleteProject.Size = new System.Drawing.Size(75, 23);
+            this.bnDeleteProject.Size = new System.Drawing.Size(112, 35);
             this.bnDeleteProject.TabIndex = 2;
             this.bnDeleteProject.Text = "Удалить";
             this.bnDeleteProject.UseVisualStyleBackColor = true;
+            this.bnDeleteProject.Click += new System.EventHandler(this.bnDeleteProject_Click);
             // 
             // FormDeleteProject
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 200);
+            this.ClientSize = new System.Drawing.Size(456, 308);
             this.Controls.Add(this.bnDeleteProject);
             this.Controls.Add(this.cbProjectNameForDelete);
             this.Controls.Add(this.lbTitle);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormDeleteProject";
             this.Text = "Удаление проекта";
+            this.Load += new System.EventHandler(this.FormDeleteProject_Load_1);
             this.ResumeLayout(false);
 
         }
