@@ -28,74 +28,69 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbForlbStatus = new System.Windows.Forms.Label();
-            this.lbConnectStatus = new System.Windows.Forms.Label();
             this.bnCreateDB = new System.Windows.Forms.Button();
-            this.bnConnectFile = new System.Windows.Forms.Button();
             this.dgvViewer = new System.Windows.Forms.DataGridView();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Project = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bnReadAll = new System.Windows.Forms.Button();
             this.bnAddData = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Project = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolSpFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolSpFileCreate = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolSpFileOpen = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewer)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lbForlbStatus
-            // 
-            this.lbForlbStatus.AutoSize = true;
-            this.lbForlbStatus.Location = new System.Drawing.Point(25, 408);
-            this.lbForlbStatus.Name = "lbForlbStatus";
-            this.lbForlbStatus.Size = new System.Drawing.Size(44, 13);
-            this.lbForlbStatus.TabIndex = 0;
-            this.lbForlbStatus.Text = "Статус:";
-            // 
-            // lbConnectStatus
-            // 
-            this.lbConnectStatus.AutoSize = true;
-            this.lbConnectStatus.Location = new System.Drawing.Point(86, 408);
-            this.lbConnectStatus.Name = "lbConnectStatus";
-            this.lbConnectStatus.Size = new System.Drawing.Size(0, 13);
-            this.lbConnectStatus.TabIndex = 1;
             // 
             // bnCreateDB
             // 
-            this.bnCreateDB.Location = new System.Drawing.Point(39, 35);
+            this.bnCreateDB.Location = new System.Drawing.Point(100, 52);
+            this.bnCreateDB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnCreateDB.Name = "bnCreateDB";
-            this.bnCreateDB.Size = new System.Drawing.Size(105, 23);
+            this.bnCreateDB.Size = new System.Drawing.Size(158, 35);
             this.bnCreateDB.TabIndex = 2;
             this.bnCreateDB.Text = "Создать файл";
             this.bnCreateDB.UseVisualStyleBackColor = true;
             this.bnCreateDB.Click += new System.EventHandler(this.bnCreateDB_Click);
             // 
-            // bnConnectFile
-            // 
-            this.bnConnectFile.Location = new System.Drawing.Point(183, 34);
-            this.bnConnectFile.Name = "bnConnectFile";
-            this.bnConnectFile.Size = new System.Drawing.Size(132, 23);
-            this.bnConnectFile.TabIndex = 3;
-            this.bnConnectFile.Text = "Подключиться к файлу";
-            this.bnConnectFile.UseVisualStyleBackColor = true;
-            this.bnConnectFile.Click += new System.EventHandler(this.bnConnectFile_Click);
-            // 
             // dgvViewer
             // 
+            this.dgvViewer.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvViewer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number,
             this.Project});
-            this.dgvViewer.Location = new System.Drawing.Point(39, 124);
+            this.dgvViewer.Location = new System.Drawing.Point(13, 172);
+            this.dgvViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvViewer.Name = "dgvViewer";
-            this.dgvViewer.Size = new System.Drawing.Size(649, 258);
+            this.dgvViewer.RowHeadersWidth = 62;
+            this.dgvViewer.Size = new System.Drawing.Size(871, 306);
             this.dgvViewer.TabIndex = 4;
+            // 
+            // Number
+            // 
+            this.Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Number.HeaderText = "Номер";
+            this.Number.MinimumWidth = 8;
+            this.Number.Name = "Number";
+            this.Number.Width = 95;
+            // 
+            // Project
+            // 
+            this.Project.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Project.HeaderText = "Наименование проекта";
+            this.Project.MinimumWidth = 8;
+            this.Project.Name = "Project";
+            this.Project.Width = 205;
             // 
             // bnReadAll
             // 
-            this.bnReadAll.Location = new System.Drawing.Point(356, 35);
+            this.bnReadAll.Location = new System.Drawing.Point(534, 54);
+            this.bnReadAll.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnReadAll.Name = "bnReadAll";
-            this.bnReadAll.Size = new System.Drawing.Size(92, 23);
+            this.bnReadAll.Size = new System.Drawing.Size(138, 35);
             this.bnReadAll.TabIndex = 5;
             this.bnReadAll.Text = "Прочитать всё";
             this.bnReadAll.UseVisualStyleBackColor = true;
@@ -103,9 +98,10 @@
             // 
             // bnAddData
             // 
-            this.bnAddData.Location = new System.Drawing.Point(483, 35);
+            this.bnAddData.Location = new System.Drawing.Point(724, 54);
+            this.bnAddData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnAddData.Name = "bnAddData";
-            this.bnAddData.Size = new System.Drawing.Size(109, 23);
+            this.bnAddData.Size = new System.Drawing.Size(164, 35);
             this.bnAddData.TabIndex = 6;
             this.bnAddData.Text = "Добавить данные";
             this.bnAddData.UseVisualStyleBackColor = true;
@@ -113,76 +109,92 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(483, 82);
+            this.textBox1.Location = new System.Drawing.Point(724, 126);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(148, 26);
             this.textBox1.TabIndex = 7;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(600, 82);
+            this.textBox2.Location = new System.Drawing.Point(900, 126);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.Size = new System.Drawing.Size(148, 26);
             this.textBox2.TabIndex = 8;
             // 
-            // Number
+            // menuStrip1
             // 
-            this.Number.HeaderText = "Номер";
-            this.Number.Name = "Number";
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolSpFile});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1206, 33);
+            this.menuStrip1.TabIndex = 10;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // Project
+            // toolSpFile
             // 
-            this.Project.HeaderText = "Наименование проекта";
-            this.Project.Name = "Project";
+            this.toolSpFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolSpFileCreate,
+            this.toolSpFileOpen});
+            this.toolSpFile.Name = "toolSpFile";
+            this.toolSpFile.Size = new System.Drawing.Size(69, 29);
+            this.toolSpFile.Text = "Файл";
             // 
-            // button1
+            // toolSpFileCreate
             // 
-            this.button1.Location = new System.Drawing.Point(356, 523);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.toolSpFileCreate.Name = "toolSpFileCreate";
+            this.toolSpFileCreate.Size = new System.Drawing.Size(270, 34);
+            this.toolSpFileCreate.Text = "Создать";
+            this.toolSpFileCreate.Click += new System.EventHandler(this.toolSpFileCreate_Click);
+            // 
+            // toolSpFileOpen
+            // 
+            this.toolSpFileOpen.Name = "toolSpFileOpen";
+            this.toolSpFileOpen.Size = new System.Drawing.Size(270, 34);
+            this.toolSpFileOpen.Text = "Открыть";
+            this.toolSpFileOpen.Click += new System.EventHandler(this.toolSpFileOpen_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 674);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1206, 874);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.bnAddData);
             this.Controls.Add(this.bnReadAll);
             this.Controls.Add(this.dgvViewer);
-            this.Controls.Add(this.bnConnectFile);
             this.Controls.Add(this.bnCreateDB);
-            this.Controls.Add(this.lbConnectStatus);
-            this.Controls.Add(this.lbForlbStatus);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Система отслеживания задач/ошибок";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewer)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lbForlbStatus;
-        private System.Windows.Forms.Label lbConnectStatus;
         private System.Windows.Forms.Button bnCreateDB;
-        private System.Windows.Forms.Button bnConnectFile;
         private System.Windows.Forms.DataGridView dgvViewer;
         private System.Windows.Forms.Button bnReadAll;
         private System.Windows.Forms.Button bnAddData;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolSpFile;
+        private System.Windows.Forms.ToolStripMenuItem toolSpFileCreate;
+        private System.Windows.Forms.ToolStripMenuItem toolSpFileOpen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn Project;
-        private System.Windows.Forms.Button button1;
     }
 }
 
