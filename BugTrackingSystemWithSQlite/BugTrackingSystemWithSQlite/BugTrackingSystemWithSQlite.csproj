@@ -84,6 +84,12 @@
     <Compile Include="FormDeleteProject.Designer.cs">
       <DependentUpon>FormDeleteProject.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDeleteTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeleteTask.Designer.cs">
+      <DependentUpon>FormDeleteTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormDeleteUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,8 +104,14 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAddTask.resx">
+      <DependentUpon>FormAddTask.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormDeleteProject.resx">
       <DependentUpon>FormDeleteProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDeleteTask.resx">
+      <DependentUpon>FormDeleteTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDeleteUser.resx">
       <DependentUpon>FormDeleteUser.cs</DependentUpon>

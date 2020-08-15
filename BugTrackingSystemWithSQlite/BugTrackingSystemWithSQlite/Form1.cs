@@ -29,7 +29,7 @@ namespace BugTrackingSystemWithSQlite
             dbConnect = new SQLiteConnection();
             dbCommand = new SQLiteCommand();
         }
-        //Создание файла
+        //Создать файла
         private void toolSpFileCreate_Click(object sender, EventArgs e)
         {            
             DataTable dTable = new DataTable();
@@ -52,7 +52,7 @@ namespace BugTrackingSystemWithSQlite
                         dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
                         dbConnect.Open();
                         dbCommand.Connection = dbConnect;
-                        dbCommand.CommandText = "CREATE TABLE IF NOT EXISTS ProjectList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, Project TEXT);CREATE TABLE IF NOT EXISTS UserList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, User TEXT)";
+                        dbCommand.CommandText = "CREATE TABLE IF NOT EXISTS ProjectList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, Project TEXT);CREATE TABLE IF NOT EXISTS UserList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, User TEXT);CREATE TABLE IF NOT EXISTS TaskList (idTask INTEGER PRIMARY KEY AUTOINCREMENT, Task TEXT, Project TEXT, Theme TEXT, Type TEXT, Priority TEXT, User TEXT, Description TEXT)";
                         dbCommand.ExecuteNonQuery();
                     }
                     catch (SQLiteException ex)
@@ -80,7 +80,7 @@ namespace BugTrackingSystemWithSQlite
                     dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
                     dbConnect.Open();
                     dbCommand.Connection = dbConnect;
-                    dbCommand.CommandText = "CREATE TABLE IF NOT EXISTS ProjectList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, Project TEXT);CREATE TABLE IF NOT EXISTS UserList (idUser INTEGER PRIMARY KEY AUTOINCREMENT, User TEXT)";
+                    dbCommand.CommandText = "CREATE TABLE IF NOT EXISTS ProjectList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, Project TEXT);CREATE TABLE IF NOT EXISTS UserList (idProject INTEGER PRIMARY KEY AUTOINCREMENT, User TEXT);CREATE TABLE IF NOT EXISTS TaskList (idTask INTEGER PRIMARY KEY AUTOINCREMENT, Task TEXT, Project TEXT, Theme TEXT, Type TEXT, Priority TEXT, User TEXT, Description TEXT)";
                     dbCommand.ExecuteNonQuery();
                 }
                 catch (SQLiteException ex)
@@ -138,7 +138,8 @@ namespace BugTrackingSystemWithSQlite
         //Показать список задач в проекте
         private void bnShowTasksInProject_Click(object sender, EventArgs e)
         {
-
+            Task task = new Task(dbFileName, dbConnect, dbCommand);
+            task.ShowTasks(dgvViewer);
         }
 
         //Показать список задач на исполнителе

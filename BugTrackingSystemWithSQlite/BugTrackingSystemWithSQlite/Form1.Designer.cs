@@ -48,21 +48,24 @@
             this.bnShowUsers = new System.Windows.Forms.Button();
             this.bnShowTasksInProject = new System.Windows.Forms.Button();
             this.bnShowTasksOnUser = new System.Windows.Forms.Button();
+            this.bnDeleteTask = new System.Windows.Forms.Button();
+            this.bnAddTask = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewer)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gbProjects.SuspendLayout();
             this.gbUsers.SuspendLayout();
+            this.gbTasks.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvViewer
             // 
             this.dgvViewer.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvViewer.Location = new System.Drawing.Point(16, 522);
+            this.dgvViewer.Location = new System.Drawing.Point(18, 357);
             this.dgvViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvViewer.Name = "dgvViewer";
             this.dgvViewer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dgvViewer.Size = new System.Drawing.Size(920, 334);
+            this.dgvViewer.Size = new System.Drawing.Size(1162, 334);
             this.dgvViewer.TabIndex = 4;
             // 
             // bnAddNameProject
@@ -131,7 +134,7 @@
             this.gbProjects.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbProjects.Name = "gbProjects";
             this.gbProjects.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbProjects.Size = new System.Drawing.Size(300, 411);
+            this.gbProjects.Size = new System.Drawing.Size(300, 278);
             this.gbProjects.TabIndex = 11;
             this.gbProjects.TabStop = false;
             this.gbProjects.Text = "ПРОЕКТЫ";
@@ -170,7 +173,7 @@
             this.gbUsers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbUsers.Name = "gbUsers";
             this.gbUsers.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbUsers.Size = new System.Drawing.Size(300, 411);
+            this.gbUsers.Size = new System.Drawing.Size(300, 278);
             this.gbUsers.TabIndex = 12;
             this.gbUsers.TabStop = false;
             this.gbUsers.Text = "ПОЛЬЗОВАТЕЛИ";
@@ -221,19 +224,21 @@
             // 
             // gbTasks
             // 
+            this.gbTasks.Controls.Add(this.bnDeleteTask);
+            this.gbTasks.Controls.Add(this.bnAddTask);
             this.gbTasks.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gbTasks.Location = new System.Drawing.Point(636, 69);
             this.gbTasks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbTasks.Name = "gbTasks";
             this.gbTasks.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbTasks.Size = new System.Drawing.Size(300, 411);
+            this.gbTasks.Size = new System.Drawing.Size(300, 278);
             this.gbTasks.TabIndex = 13;
             this.gbTasks.TabStop = false;
             this.gbTasks.Text = "ЗАДАЧИ";
             // 
             // bnShowProjects
             // 
-            this.bnShowProjects.Location = new System.Drawing.Point(975, 522);
+            this.bnShowProjects.Location = new System.Drawing.Point(975, 69);
             this.bnShowProjects.Name = "bnShowProjects";
             this.bnShowProjects.Size = new System.Drawing.Size(205, 65);
             this.bnShowProjects.TabIndex = 14;
@@ -243,7 +248,7 @@
             // 
             // bnShowUsers
             // 
-            this.bnShowUsers.Location = new System.Drawing.Point(975, 593);
+            this.bnShowUsers.Location = new System.Drawing.Point(975, 140);
             this.bnShowUsers.Name = "bnShowUsers";
             this.bnShowUsers.Size = new System.Drawing.Size(205, 65);
             this.bnShowUsers.TabIndex = 15;
@@ -253,7 +258,7 @@
             // 
             // bnShowTasksInProject
             // 
-            this.bnShowTasksInProject.Location = new System.Drawing.Point(975, 664);
+            this.bnShowTasksInProject.Location = new System.Drawing.Point(975, 211);
             this.bnShowTasksInProject.Name = "bnShowTasksInProject";
             this.bnShowTasksInProject.Size = new System.Drawing.Size(205, 65);
             this.bnShowTasksInProject.TabIndex = 16;
@@ -263,7 +268,7 @@
             // 
             // bnShowTasksOnUser
             // 
-            this.bnShowTasksOnUser.Location = new System.Drawing.Point(975, 735);
+            this.bnShowTasksOnUser.Location = new System.Drawing.Point(975, 282);
             this.bnShowTasksOnUser.Name = "bnShowTasksOnUser";
             this.bnShowTasksOnUser.Size = new System.Drawing.Size(205, 65);
             this.bnShowTasksOnUser.TabIndex = 17;
@@ -271,11 +276,33 @@
             this.bnShowTasksOnUser.UseVisualStyleBackColor = true;
             this.bnShowTasksOnUser.Click += new System.EventHandler(this.bnShowTasksOnUser_Click);
             // 
+            // bnDeleteTask
+            // 
+            this.bnDeleteTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bnDeleteTask.Location = new System.Drawing.Point(164, 117);
+            this.bnDeleteTask.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bnDeleteTask.Name = "bnDeleteTask";
+            this.bnDeleteTask.Size = new System.Drawing.Size(128, 54);
+            this.bnDeleteTask.TabIndex = 13;
+            this.bnDeleteTask.Text = "Удалить задачу";
+            this.bnDeleteTask.UseVisualStyleBackColor = true;
+            // 
+            // bnAddTask
+            // 
+            this.bnAddTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bnAddTask.Location = new System.Drawing.Point(8, 117);
+            this.bnAddTask.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bnAddTask.Name = "bnAddTask";
+            this.bnAddTask.Size = new System.Drawing.Size(128, 54);
+            this.bnAddTask.TabIndex = 10;
+            this.bnAddTask.Text = "Добавить задачу";
+            this.bnAddTask.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1192, 883);
+            this.ClientSize = new System.Drawing.Size(1192, 717);
             this.Controls.Add(this.bnShowTasksOnUser);
             this.Controls.Add(this.bnShowTasksInProject);
             this.Controls.Add(this.bnShowUsers);
@@ -297,6 +324,7 @@
             this.gbProjects.PerformLayout();
             this.gbUsers.ResumeLayout(false);
             this.gbUsers.PerformLayout();
+            this.gbTasks.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,6 +351,8 @@
         private System.Windows.Forms.Button bnShowUsers;
         private System.Windows.Forms.Button bnShowTasksInProject;
         private System.Windows.Forms.Button bnShowTasksOnUser;
+        private System.Windows.Forms.Button bnDeleteTask;
+        private System.Windows.Forms.Button bnAddTask;
     }
 }
 

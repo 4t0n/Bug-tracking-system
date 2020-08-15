@@ -66,7 +66,8 @@ namespace BugTrackingSystemWithSQlite
                 MessageBox.Show("Необходимо создать или открыть файл базы данных!");
             }
         }
-
+        
+        //Показать список проектов
         public void ShowProjects(DataGridView dgvViewer)
         {
             string sqlQuery;
@@ -78,8 +79,7 @@ namespace BugTrackingSystemWithSQlite
                 sqlQuery = "SELECT * FROM ProjectList";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
                 adapter.Fill(dTable);
-                dgvViewer.Rows.Clear();
-                dgvViewer.Rows.Clear();
+                dgvViewer.Rows.Clear();                
                 dgvViewer.Columns.Clear();
                 dgvProject.Name = "Project";
                 dgvProject.HeaderText = "Название проекта";
