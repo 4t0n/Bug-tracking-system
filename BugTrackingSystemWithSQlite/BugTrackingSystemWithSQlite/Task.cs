@@ -26,26 +26,12 @@ namespace BugTrackingSystemWithSQlite
             this.dbCommand = dbCommand;
         }
         //Добавление строк в БД
-        public void AddNameProject(string tbProjectName)
+        public void AddNameTask()
         {
             if (File.Exists(dbFileName))
             {
-                dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
-                dbConnect.Open();
-                dbCommand.Connection = dbConnect;
-
-                try
-                {
-                    dbCommand.CommandText = "INSERT INTO ProjectList ('Project') values ('" +
-                        tbProjectName + "')";
-
-                    dbCommand.ExecuteNonQuery();
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Ошибка: " + ex.Message);
-                }
-                //dbConnect.Close();
+                FormAddTask formAddTask = new FormAddTask(dbFileName, dbConnect, dbCommand);
+                formAddTask.Show();
             }
             else
             {
@@ -54,12 +40,12 @@ namespace BugTrackingSystemWithSQlite
         }
 
         //Вызов формы для удаления проекта
-        public void DeleteNameProject()
+        public void DeleteNameTask()
         {
             if (File.Exists(dbFileName))
             {
-                FormDeleteProject formDeleteProject = new FormDeleteProject(dbFileName, dbConnect, dbCommand);
-                formDeleteProject.Show();
+                FormDeleteTask formDeleteTask = new FormDeleteTask(dbFileName, dbConnect, dbCommand);
+                formDeleteTask.Show();
             }
             else
             {
@@ -112,6 +98,8 @@ namespace BugTrackingSystemWithSQlite
                 dgvViewer.Columns.Add(dgvPriority);
                 dgvViewer.Columns.Add(dgvUser);
                 dgvViewer.Columns.Add(dgvDescription);
+                dgvViewer.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dgvViewer.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 for (int i = 0; i < dTable.Rows.Count; i++)
                     dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
             }

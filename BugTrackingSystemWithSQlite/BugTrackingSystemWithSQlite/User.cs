@@ -70,32 +70,38 @@ namespace BugTrackingSystemWithSQlite
         //Показать список пользователей
         public void ShowUsers(DataGridView dgvViewer)
         {
-            string sqlQuery;
-            DataTable dTable = new DataTable();
-            DataGridViewTextBoxColumn dgvUser = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn dgvIdUser = new DataGridViewTextBoxColumn();
-            try
+            if (File.Exists(dbFileName))
             {
-                sqlQuery = "SELECT * FROM UserList";
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
-                adapter.Fill(dTable);
-                dgvViewer.Rows.Clear();
-                dgvViewer.Columns.Clear();
-                dgvUser.Name = "User";
-                dgvUser.HeaderText = "Имя пользователя";
-                dgvIdUser.Name = "idUser";
-                dgvIdUser.HeaderText = "Порядковый номер";
-                dgvIdUser.Visible = false;
-                dgvViewer.Columns.Add(dgvIdUser);
-                dgvViewer.Columns.Add(dgvUser);                
-                for (int i = 0; i < dTable.Rows.Count; i++)
-                    dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
+                string sqlQuery;
+                DataTable dTable = new DataTable();
+                DataGridViewTextBoxColumn dgvUser = new DataGridViewTextBoxColumn();
+                DataGridViewTextBoxColumn dgvIdUser = new DataGridViewTextBoxColumn();
+                try
+                {
+                    sqlQuery = "SELECT * FROM UserList";
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+                    adapter.Fill(dTable);
+                    dgvViewer.Rows.Clear();
+                    dgvViewer.Columns.Clear();
+                    dgvUser.Name = "User";
+                    dgvUser.HeaderText = "Имя пользователя";
+                    dgvIdUser.Name = "idUser";
+                    dgvIdUser.HeaderText = "Порядковый номер";
+                    dgvIdUser.Visible = false;
+                    dgvViewer.Columns.Add(dgvIdUser);
+                    dgvViewer.Columns.Add(dgvUser);
+                    for (int i = 0; i < dTable.Rows.Count; i++)
+                        dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Ошибка: " + ex.Message);
+                }
             }
-            catch (SQLiteException ex)
+            else
             {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }
-            dgvViewer.Columns["User"].Visible = true;
+                MessageBox.Show("Необходимо создать или открыть файл базы данных!");
+            }           
         }
     }
 }

@@ -70,31 +70,38 @@ namespace BugTrackingSystemWithSQlite
         //Показать список проектов
         public void ShowProjects(DataGridView dgvViewer)
         {
-            string sqlQuery;
-            DataTable dTable = new DataTable();
-            DataGridViewTextBoxColumn dgvIdProject = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn dgvProject = new DataGridViewTextBoxColumn();
-            try
+            if (File.Exists(dbFileName))
             {
-                sqlQuery = "SELECT * FROM ProjectList";
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
-                adapter.Fill(dTable);
-                dgvViewer.Rows.Clear();                
-                dgvViewer.Columns.Clear();
-                dgvProject.Name = "Project";
-                dgvProject.HeaderText = "Название проекта";
-                dgvIdProject.Name = "idProject";
-                dgvIdProject.HeaderText = "Порядковый номер";
-                dgvIdProject.Visible = false;
-                dgvViewer.Columns.Add(dgvIdProject);
-                dgvViewer.Columns.Add(dgvProject);
-                for (int i = 0; i < dTable.Rows.Count; i++)
-                    dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
+                string sqlQuery;
+                DataTable dTable = new DataTable();
+                DataGridViewTextBoxColumn dgvIdProject = new DataGridViewTextBoxColumn();
+                DataGridViewTextBoxColumn dgvProject = new DataGridViewTextBoxColumn();
+                try
+                {
+                    sqlQuery = "SELECT * FROM ProjectList";
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+                    adapter.Fill(dTable);
+                    dgvViewer.Rows.Clear();
+                    dgvViewer.Columns.Clear();
+                    dgvProject.Name = "Project";
+                    dgvProject.HeaderText = "Название проекта";
+                    dgvIdProject.Name = "idProject";
+                    dgvIdProject.HeaderText = "Порядковый номер";
+                    dgvIdProject.Visible = false;
+                    dgvViewer.Columns.Add(dgvIdProject);
+                    dgvViewer.Columns.Add(dgvProject);
+                    for (int i = 0; i < dTable.Rows.Count; i++)
+                        dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Ошибка: " + ex.Message);
+                }
             }
-            catch (SQLiteException ex)
+            else
             {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }            
+                MessageBox.Show("Необходимо создать или открыть файл базы данных!");
+            }                      
         }
     }
 }

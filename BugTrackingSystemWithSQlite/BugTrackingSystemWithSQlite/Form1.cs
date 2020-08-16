@@ -121,6 +121,20 @@ namespace BugTrackingSystemWithSQlite
             user.DeleteNameUser();
         }
 
+        //Добавить задачу
+        private void bnAddTask_Click(object sender, EventArgs e)
+        {
+            Task task = new Task(dbFileName, dbConnect, dbCommand);
+            task.AddNameTask();
+        }
+
+        //Удалить задачу
+        private void bnDeleteTask_Click(object sender, EventArgs e)
+        {
+            Task task = new Task(dbFileName, dbConnect, dbCommand);
+            task.DeleteNameTask();
+        }
+
         //Показать список проектов
         private void bnShowProjects_Click(object sender, EventArgs e)
         {
