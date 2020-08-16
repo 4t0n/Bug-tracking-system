@@ -50,6 +50,10 @@
             this.bnShowUsers = new System.Windows.Forms.Button();
             this.bnShowTasksInProject = new System.Windows.Forms.Button();
             this.bnShowTasksOnUser = new System.Windows.Forms.Button();
+            this.cbTasksInProject = new System.Windows.Forms.ComboBox();
+            this.cbTasksOnUser = new System.Windows.Forms.ComboBox();
+            this.lbProjectInTask = new System.Windows.Forms.Label();
+            this.lbUserOnTask = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewer)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gbProjects.SuspendLayout();
@@ -65,7 +69,7 @@
             this.dgvViewer.Location = new System.Drawing.Point(12, 232);
             this.dgvViewer.Name = "dgvViewer";
             this.dgvViewer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dgvViewer.Size = new System.Drawing.Size(775, 217);
+            this.dgvViewer.Size = new System.Drawing.Size(924, 217);
             this.dgvViewer.TabIndex = 4;
             // 
             // bnAddNameProject
@@ -95,7 +99,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(948, 24);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -247,8 +251,8 @@
             // 
             // bnShowProjects
             // 
-            this.bnShowProjects.Location = new System.Drawing.Point(650, 45);
-            this.bnShowProjects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bnShowProjects.Location = new System.Drawing.Point(629, 45);
+            this.bnShowProjects.Margin = new System.Windows.Forms.Padding(2);
             this.bnShowProjects.Name = "bnShowProjects";
             this.bnShowProjects.Size = new System.Drawing.Size(137, 42);
             this.bnShowProjects.TabIndex = 14;
@@ -258,8 +262,8 @@
             // 
             // bnShowUsers
             // 
-            this.bnShowUsers.Location = new System.Drawing.Point(650, 91);
-            this.bnShowUsers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bnShowUsers.Location = new System.Drawing.Point(629, 91);
+            this.bnShowUsers.Margin = new System.Windows.Forms.Padding(2);
             this.bnShowUsers.Name = "bnShowUsers";
             this.bnShowUsers.Size = new System.Drawing.Size(137, 42);
             this.bnShowUsers.TabIndex = 15;
@@ -269,8 +273,8 @@
             // 
             // bnShowTasksInProject
             // 
-            this.bnShowTasksInProject.Location = new System.Drawing.Point(650, 137);
-            this.bnShowTasksInProject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bnShowTasksInProject.Location = new System.Drawing.Point(629, 137);
+            this.bnShowTasksInProject.Margin = new System.Windows.Forms.Padding(2);
             this.bnShowTasksInProject.Name = "bnShowTasksInProject";
             this.bnShowTasksInProject.Size = new System.Drawing.Size(137, 42);
             this.bnShowTasksInProject.TabIndex = 16;
@@ -280,8 +284,8 @@
             // 
             // bnShowTasksOnUser
             // 
-            this.bnShowTasksOnUser.Location = new System.Drawing.Point(650, 183);
-            this.bnShowTasksOnUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bnShowTasksOnUser.Location = new System.Drawing.Point(629, 183);
+            this.bnShowTasksOnUser.Margin = new System.Windows.Forms.Padding(2);
             this.bnShowTasksOnUser.Name = "bnShowTasksOnUser";
             this.bnShowTasksOnUser.Size = new System.Drawing.Size(137, 42);
             this.bnShowTasksOnUser.TabIndex = 17;
@@ -289,11 +293,53 @@
             this.bnShowTasksOnUser.UseVisualStyleBackColor = true;
             this.bnShowTasksOnUser.Click += new System.EventHandler(this.bnShowTasksOnUser_Click);
             // 
+            // cbTasksInProject
+            // 
+            this.cbTasksInProject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTasksInProject.FormattingEnabled = true;
+            this.cbTasksInProject.Location = new System.Drawing.Point(782, 158);
+            this.cbTasksInProject.Name = "cbTasksInProject";
+            this.cbTasksInProject.Size = new System.Drawing.Size(154, 21);
+            this.cbTasksInProject.TabIndex = 18;
+            this.cbTasksInProject.Enter += new System.EventHandler(this.cbTasksInProject_Enter);
+            // 
+            // cbTasksOnUser
+            // 
+            this.cbTasksOnUser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTasksOnUser.FormattingEnabled = true;
+            this.cbTasksOnUser.Location = new System.Drawing.Point(782, 204);
+            this.cbTasksOnUser.Name = "cbTasksOnUser";
+            this.cbTasksOnUser.Size = new System.Drawing.Size(154, 21);
+            this.cbTasksOnUser.TabIndex = 19;
+            this.cbTasksOnUser.Enter += new System.EventHandler(this.cbTasksOnUser_Enter);
+            // 
+            // lbProjectInTask
+            // 
+            this.lbProjectInTask.AutoSize = true;
+            this.lbProjectInTask.Location = new System.Drawing.Point(779, 137);
+            this.lbProjectInTask.Name = "lbProjectInTask";
+            this.lbProjectInTask.Size = new System.Drawing.Size(104, 13);
+            this.lbProjectInTask.TabIndex = 20;
+            this.lbProjectInTask.Text = "Название проекта:";
+            // 
+            // lbUserOnTask
+            // 
+            this.lbUserOnTask.AutoSize = true;
+            this.lbUserOnTask.Location = new System.Drawing.Point(779, 183);
+            this.lbUserOnTask.Name = "lbUserOnTask";
+            this.lbUserOnTask.Size = new System.Drawing.Size(100, 13);
+            this.lbUserOnTask.TabIndex = 21;
+            this.lbUserOnTask.Text = "Имя исполнителя:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 466);
+            this.ClientSize = new System.Drawing.Size(948, 466);
+            this.Controls.Add(this.lbUserOnTask);
+            this.Controls.Add(this.lbProjectInTask);
+            this.Controls.Add(this.cbTasksOnUser);
+            this.Controls.Add(this.cbTasksInProject);
             this.Controls.Add(this.bnShowTasksOnUser);
             this.Controls.Add(this.bnShowTasksInProject);
             this.Controls.Add(this.bnShowUsers);
@@ -343,6 +389,10 @@
         private System.Windows.Forms.Button bnShowTasksOnUser;
         private System.Windows.Forms.Button bnDeleteTask;
         private System.Windows.Forms.Button bnAddTask;
+        private System.Windows.Forms.ComboBox cbTasksInProject;
+        private System.Windows.Forms.ComboBox cbTasksOnUser;
+        private System.Windows.Forms.Label lbProjectInTask;
+        private System.Windows.Forms.Label lbUserOnTask;
     }
 }
 

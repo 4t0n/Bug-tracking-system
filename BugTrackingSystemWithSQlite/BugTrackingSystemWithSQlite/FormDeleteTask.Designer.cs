@@ -57,7 +57,7 @@
             this.lbTitleTask.Name = "lbTitleTask";
             this.lbTitleTask.Size = new System.Drawing.Size(280, 13);
             this.lbTitleTask.TabIndex = 3;
-            this.lbTitleTask.Text = "Выберитезадачу, которую нужно удалить.";
+            this.lbTitleTask.Text = "Выберите задачу, которую нужно удалить.";
             this.lbTitleTask.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormDeleteTask
@@ -68,7 +68,7 @@
             this.Controls.Add(this.bnDeleteTask);
             this.Controls.Add(this.cbTaskNameForDelete);
             this.Controls.Add(this.lbTitleTask);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormDeleteTask";
             this.Text = "Удаление задачи";
             this.Load += new System.EventHandler(this.FormDeleteTask_Load);

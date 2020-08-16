@@ -48,18 +48,25 @@ namespace BugTrackingSystemWithSQlite
         
         private void bnDeleteUser_Click(object sender, EventArgs e)
         {
-            string sqlQuery = "DELETE FROM UserList WHERE User = '" + cbUserNameForDelete.SelectedItem.ToString() + "'";
-            try
+            string sqlQueryUser = "DELETE FROM UserList WHERE User = '" + cbUserNameForDelete.SelectedItem.ToString() + "'";
+            string sqlQueryTask = "DELETE FROM TaskList WHERE User = '" + cbUserNameForDelete.SelectedItem.ToString() + "'";
+            DialogResult dialogResult = MessageBox.Show("Удаление пользователя приведёт к удалению задачи, исполнителем которой он является. Удалить пользователя?", "Внимание!", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                dbCommand.CommandText = sqlQuery;
-                dbCommand.ExecuteNonQuery();
-                MessageBox.Show("Проект удалён.");
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }
-            this.Close();
+                try
+                {
+                    dbCommand.CommandText = sqlQueryUser;
+                    dbCommand.ExecuteNonQuery();
+                    dbCommand.CommandText = sqlQueryTask;
+                    dbCommand.ExecuteNonQuery();
+                    MessageBox.Show("Пользователь удалён.");
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Ошибка: " + ex.Message);
+                }
+                this.Close();
+            }            
         }
     }
 }

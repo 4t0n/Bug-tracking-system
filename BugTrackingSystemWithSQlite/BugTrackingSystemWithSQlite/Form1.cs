@@ -58,7 +58,7 @@ namespace BugTrackingSystemWithSQlite
                     catch (SQLiteException ex)
                     {
                         MessageBox.Show("Ошибка: " + ex.Message);
-                    }
+                    }                    
                 }                
                 dbConnect.Close();
             }            
@@ -94,24 +94,52 @@ namespace BugTrackingSystemWithSQlite
         //Добавление проекта
         private void bnAddNameProject_Click(object sender, EventArgs e)
         {
-            Project project = new Project(dbFileName, dbConnect, dbCommand);
-            project.AddNameProject(tbProjectName.Text);
-            tbProjectName.Clear();
+            if (File.Exists(dbFileName))
+            {
+                if (tbProjectName.Text != "")
+                {
+                    Project project = new Project(dbFileName, dbConnect, dbCommand);
+                    project.AddNameProject(tbProjectName.Text);
+                    tbProjectName.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Введите название проекта!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Необходимо создать или открыть файл базы данных!");
+            }
         }
 
         //Удалить проект
         private void bnDeleteProject_Click(object sender, EventArgs e)
         {
             Project project = new Project(dbFileName, dbConnect, dbCommand);
-            project.DeleteNameProject();
+            project.DeleteNameProject();            
         }
 
         //Добавить пользователя
         private void bnAddNameUser_Click(object sender, EventArgs e)
         {
-            User user = new User(dbFileName, dbConnect, dbCommand);
-            user.AddNameUser(tbUserName.Text);
-            tbUserName.Clear();
+            if (File.Exists(dbFileName))
+            {
+                if (tbUserName.Text != "")
+                {
+                    User user = new User(dbFileName, dbConnect, dbCommand);
+                    user.AddNameUser(tbUserName.Text);
+                    tbUserName.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Введите имя пользователя!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Необходимо создать или открыть файл базы данных!");
+            }            
         }
         
         //Удалить пользователя
@@ -152,16 +180,98 @@ namespace BugTrackingSystemWithSQlite
         //Показать список задач в проекте
         private void bnShowTasksInProject_Click(object sender, EventArgs e)
         {
-            Task task = new Task(dbFileName, dbConnect, dbCommand);
-            task.ShowTasks(dgvViewer);
+            Task task = new Task(dbFileName, dbConnect, dbCommand);            
+            if (File.Exists(dbFileName))
+            {
+                if (cbTasksInProject.SelectedIndex >= 0)
+                {
+                    task.ShowTasksInProject(dgvViewer, cbTasksInProject.SelectedItem.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Выберите проект!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Необходимо создать или открыть файл базы данных!");
+            }
         }
 
         //Показать список задач на исполнителе
         private void bnShowTasksOnUser_Click(object sender, EventArgs e)
         {
-
+            Task task = new Task(dbFileName, dbConnect, dbCommand);
+            if (File.Exists(dbFileName))
+            {
+                if (cbTasksOnUser.SelectedIndex >= 0)
+                {
+                    task.ShowTasksOnUser(dgvViewer, cbTasksOnUser.SelectedItem.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Выберите исполнителя!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Необходимо создать или открыть файл базы данных!");
+            }
         }
 
         
+        //Заполнение списка проектов для задач
+        private void fillCbTasksInProject()
+        {
+            dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
+            dbConnect.Open();
+            dbCommand.Connection = dbConnect;
+            string sqlQuery;
+            DataTable dTable = new DataTable();
+            sqlQuery = "SELECT Project FROM ProjectList";
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(dTable);
+            cbTasksInProject.Items.Clear();
+
+            for (int i = 0; i < dTable.Rows.Count; i++)
+            {
+                cbTasksInProject.Items.AddRange(dTable.Rows[i].ItemArray);
+            }
+        }        
+
+        private void cbTasksInProject_Enter(object sender, EventArgs e)
+        {
+            if (File.Exists(dbFileName))
+            {
+                fillCbTasksInProject();
+            }
+        }
+
+        //Заполнение списка пользователей для задач
+        private void fillCbTasksOnUser()
+        {
+            dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
+            dbConnect.Open();
+            dbCommand.Connection = dbConnect;
+            string sqlQuery;
+            DataTable dTable = new DataTable();
+            sqlQuery = "SELECT User FROM UserList";
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(dTable);
+            cbTasksOnUser.Items.Clear();
+
+            for (int i = 0; i < dTable.Rows.Count; i++)
+            {
+                cbTasksOnUser.Items.AddRange(dTable.Rows[i].ItemArray);
+            }
+        }
+
+        private void cbTasksOnUser_Enter(object sender, EventArgs e)
+        {
+            if (File.Exists(dbFileName))
+            {
+                fillCbTasksOnUser();
+            }            
+        }
     }    
 }

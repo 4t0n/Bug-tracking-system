@@ -27,7 +27,31 @@ namespace BugTrackingSystemWithSQlite
             this.dbCommand = dbCommand;
         }        
 
-        private void FormDeleteProject_Load_1(object sender, EventArgs e)
+
+        private void bnDeleteProject_Click(object sender, EventArgs e)
+        {
+            string sqlQueryProject = "DELETE FROM ProjectList WHERE Project = '"+cbProjectNameForDelete.SelectedItem.ToString()+"'";
+            string sqlQueryTask = "DELETE FROM TaskList WHERE Project = '" + cbProjectNameForDelete.SelectedItem.ToString() + "'";
+            DialogResult dialogResult = MessageBox.Show("Удаление проекта приведёт к удалению задачи, входящей в состав данного проекта. Удалить проект?", "Внимание!", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    dbCommand.CommandText = sqlQueryProject;
+                    dbCommand.ExecuteNonQuery();
+                    dbCommand.CommandText = sqlQueryTask;
+                    dbCommand.ExecuteNonQuery();
+                    MessageBox.Show("Проект удалён.");
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Ошибка: " + ex.Message);
+                }
+                this.Close();
+            }            
+        }
+
+        private void FormDeleteProject_Load(object sender, EventArgs e)
         {
             dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
             dbConnect.Open();
@@ -43,22 +67,6 @@ namespace BugTrackingSystemWithSQlite
             {
                 cbProjectNameForDelete.Items.AddRange(dTable.Rows[i].ItemArray);
             }
-        }
-
-        private void bnDeleteProject_Click(object sender, EventArgs e)
-        {
-            string sqlQuery = "DELETE FROM ProjectList WHERE Project = '"+cbProjectNameForDelete.SelectedItem.ToString()+"'";
-            try
-            {
-                dbCommand.CommandText = sqlQuery;                
-                dbCommand.ExecuteNonQuery();
-                MessageBox.Show("Проект удалён.");
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }            
-            this.Close();
         }
     }
 }
