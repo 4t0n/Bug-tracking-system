@@ -66,10 +66,10 @@
             this.dgvViewer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvViewer.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvViewer.Location = new System.Drawing.Point(12, 232);
+            this.dgvViewer.Location = new System.Drawing.Point(12, 241);
             this.dgvViewer.Name = "dgvViewer";
             this.dgvViewer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dgvViewer.Size = new System.Drawing.Size(924, 217);
+            this.dgvViewer.Size = new System.Drawing.Size(924, 234);
             this.dgvViewer.TabIndex = 4;
             // 
             // bnAddNameProject
@@ -335,7 +335,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 466);
+            this.ClientSize = new System.Drawing.Size(948, 487);
             this.Controls.Add(this.lbUserOnTask);
             this.Controls.Add(this.lbProjectInTask);
             this.Controls.Add(this.cbTasksOnUser);

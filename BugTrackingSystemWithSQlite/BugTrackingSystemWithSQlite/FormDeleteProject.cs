@@ -25,32 +25,9 @@ namespace BugTrackingSystemWithSQlite
             this.dbFileName = dbFileName;
             this.dbConnect = dbConnect;
             this.dbCommand = dbCommand;
-        }        
-
-
-        private void bnDeleteProject_Click(object sender, EventArgs e)
-        {
-            string sqlQueryProject = "DELETE FROM ProjectList WHERE Project = '"+cbProjectNameForDelete.SelectedItem.ToString()+"'";
-            string sqlQueryTask = "DELETE FROM TaskList WHERE Project = '" + cbProjectNameForDelete.SelectedItem.ToString() + "'";
-            DialogResult dialogResult = MessageBox.Show("Удаление проекта приведёт к удалению задачи, входящей в состав данного проекта. Удалить проект?", "Внимание!", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                try
-                {
-                    dbCommand.CommandText = sqlQueryProject;
-                    dbCommand.ExecuteNonQuery();
-                    dbCommand.CommandText = sqlQueryTask;
-                    dbCommand.ExecuteNonQuery();
-                    MessageBox.Show("Проект удалён.");
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Ошибка: " + ex.Message);
-                }
-                this.Close();
-            }            
         }
 
+        //Заполнение списка проектов
         private void FormDeleteProject_Load(object sender, EventArgs e)
         {
             dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
@@ -68,5 +45,36 @@ namespace BugTrackingSystemWithSQlite
                 cbProjectNameForDelete.Items.AddRange(dTable.Rows[i].ItemArray);
             }
         }
+
+        //Кнопка удаления проекта
+        private void bnDeleteProject_Click(object sender, EventArgs e)
+        {
+            if (cbProjectNameForDelete.SelectedIndex >= 0)
+            {
+                string sqlQueryProject = "DELETE FROM ProjectList WHERE Project = '" + cbProjectNameForDelete.SelectedItem.ToString() + "'";
+                string sqlQueryTask = "DELETE FROM TaskList WHERE Project = '" + cbProjectNameForDelete.SelectedItem.ToString() + "'";
+                DialogResult dialogResult = MessageBox.Show("Удаление проекта приведёт к удалению задачи, входящей в состав данного проекта. Удалить проект?", "Внимание!", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    try
+                    {
+                        dbCommand.CommandText = sqlQueryProject;
+                        dbCommand.ExecuteNonQuery();
+                        dbCommand.CommandText = sqlQueryTask;
+                        dbCommand.ExecuteNonQuery();
+                        MessageBox.Show("Проект удалён.");
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        MessageBox.Show("Ошибка: " + ex.Message);
+                    }
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите название проекта!");
+            }                       
+        }        
     }
 }

@@ -29,10 +29,10 @@ namespace BugTrackingSystemWithSQlite
             dbConnect = new SQLiteConnection();
             dbCommand = new SQLiteCommand();
         }
-        //Создать файла
+
+        //Создание файла
         private void toolSpFileCreate_Click(object sender, EventArgs e)
         {            
-            DataTable dTable = new DataTable();
             Stream myStream;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -61,13 +61,14 @@ namespace BugTrackingSystemWithSQlite
                     }                    
                 }                
                 dbConnect.Close();
+                dgvViewer.Rows.Clear();
+                dgvViewer.Columns.Clear();
             }            
         }
 
-        //Открыть файл
+        //Открытие файла
         private void toolSpFileOpen_Click(object sender, EventArgs e)
         {            
-            DataTable dTable = new DataTable();
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
             openFileDialog.Filter = "DataBase Files(*.db;*.sdb;*.sqlite;*.db3;*.s3db;*.sqlite3;*.sl3;)|*.db*;.sdb;*.sqlite;*.db3;*.s3db;*.sqlite3;*.sl3;";
@@ -88,10 +89,12 @@ namespace BugTrackingSystemWithSQlite
                     MessageBox.Show("Ошибка: " + ex.Message);
                 }                
                 dbConnect.Close();
+                dgvViewer.Rows.Clear();
+                dgvViewer.Columns.Clear();
             }
         }
 
-        //Добавление проекта
+        //Кнопка добавления проекта
         private void bnAddNameProject_Click(object sender, EventArgs e)
         {
             if (File.Exists(dbFileName))
@@ -113,14 +116,14 @@ namespace BugTrackingSystemWithSQlite
             }
         }
 
-        //Удалить проект
+        //Кнопка удаления проекта
         private void bnDeleteProject_Click(object sender, EventArgs e)
         {
             Project project = new Project(dbFileName, dbConnect, dbCommand);
             project.DeleteNameProject();            
         }
 
-        //Добавить пользователя
+        //Кнопка добавления пользователя
         private void bnAddNameUser_Click(object sender, EventArgs e)
         {
             if (File.Exists(dbFileName))
@@ -142,21 +145,21 @@ namespace BugTrackingSystemWithSQlite
             }            
         }
         
-        //Удалить пользователя
+        //Кнопка удаления пользователя
         private void bnDeleteUser_Click(object sender, EventArgs e)
         {
             User user = new User(dbFileName, dbConnect, dbCommand);
             user.DeleteNameUser();
         }
 
-        //Добавить задачу
+        //Кнопка добавления задачи
         private void bnAddTask_Click(object sender, EventArgs e)
         {
             Task task = new Task(dbFileName, dbConnect, dbCommand);
             task.AddNameTask();
         }
 
-        //Удалить задачу
+        //Кнопка удаления задачи
         private void bnDeleteTask_Click(object sender, EventArgs e)
         {
             Task task = new Task(dbFileName, dbConnect, dbCommand);
@@ -237,8 +240,7 @@ namespace BugTrackingSystemWithSQlite
             {
                 cbTasksInProject.Items.AddRange(dTable.Rows[i].ItemArray);
             }
-        }        
-
+        }
         private void cbTasksInProject_Enter(object sender, EventArgs e)
         {
             if (File.Exists(dbFileName))
@@ -265,7 +267,6 @@ namespace BugTrackingSystemWithSQlite
                 cbTasksOnUser.Items.AddRange(dTable.Rows[i].ItemArray);
             }
         }
-
         private void cbTasksOnUser_Enter(object sender, EventArgs e)
         {
             if (File.Exists(dbFileName))

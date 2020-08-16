@@ -27,6 +27,7 @@ namespace BugTrackingSystemWithSQlite
             this.dbCommand = dbCommand;
         }
 
+        //Заполнение списка пользователей
         private void FormDeleteUser_Load(object sender, EventArgs e)
         {
             dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
@@ -43,30 +44,37 @@ namespace BugTrackingSystemWithSQlite
             {
                 cbUserNameForDelete.Items.AddRange(dTable.Rows[i].ItemArray);
             }
-        }       
+        }
 
-        
+        //Кнопка удаления пользователя
         private void bnDeleteUser_Click(object sender, EventArgs e)
         {
-            string sqlQueryUser = "DELETE FROM UserList WHERE User = '" + cbUserNameForDelete.SelectedItem.ToString() + "'";
-            string sqlQueryTask = "DELETE FROM TaskList WHERE User = '" + cbUserNameForDelete.SelectedItem.ToString() + "'";
-            DialogResult dialogResult = MessageBox.Show("Удаление пользователя приведёт к удалению задачи, исполнителем которой он является. Удалить пользователя?", "Внимание!", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            if (cbUserNameForDelete.SelectedIndex >= 0)
             {
-                try
+                string sqlQueryUser = "DELETE FROM UserList WHERE User = '" + cbUserNameForDelete.SelectedItem.ToString() + "'";
+                string sqlQueryTask = "DELETE FROM TaskList WHERE User = '" + cbUserNameForDelete.SelectedItem.ToString() + "'";
+                DialogResult dialogResult = MessageBox.Show("Удаление пользователя приведёт к удалению задачи, исполнителем которой он является. Удалить пользователя?", "Внимание!", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    dbCommand.CommandText = sqlQueryUser;
-                    dbCommand.ExecuteNonQuery();
-                    dbCommand.CommandText = sqlQueryTask;
-                    dbCommand.ExecuteNonQuery();
-                    MessageBox.Show("Пользователь удалён.");
+                    try
+                    {
+                        dbCommand.CommandText = sqlQueryUser;
+                        dbCommand.ExecuteNonQuery();
+                        dbCommand.CommandText = sqlQueryTask;
+                        dbCommand.ExecuteNonQuery();
+                        MessageBox.Show("Пользователь удалён.");
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        MessageBox.Show("Ошибка: " + ex.Message);
+                    }
+                    this.Close();
                 }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Ошибка: " + ex.Message);
-                }
-                this.Close();
-            }            
+            }
+            else
+            {
+                MessageBox.Show("Введите имя пользователя!");
+            }
         }
     }
 }

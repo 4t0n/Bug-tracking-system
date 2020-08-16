@@ -25,24 +25,9 @@ namespace BugTrackingSystemWithSQlite
             this.dbFileName = dbFileName;
             this.dbConnect = dbConnect;
             this.dbCommand = dbCommand;
-        }        
-
-        private void bnAddTask_Click(object sender, EventArgs e)
-        {
-            string sqlQuery = "INSERT INTO TaskList (Task, Project, Theme, Type, Priority, User, Description) values ('" +tbTaskName.Text+ "', '"+cbProjectName.SelectedItem.ToString()+"','"+tbTheme.Text+"','"+tbType.Text+"','"+tbPriority.Text+"','"+cbUserName.SelectedItem.ToString()+"','"+tbDescription.Text+"')";
-            try
-            {
-                dbCommand.CommandText = sqlQuery;
-                dbCommand.ExecuteNonQuery();
-                MessageBox.Show("Задача добавлена.");
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }
-            this.Close();
         }
 
+        //Заполнение списка проектов и пользователей
         private void FormAddTask_Load(object sender, EventArgs e)
         {
             dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
@@ -71,5 +56,22 @@ namespace BugTrackingSystemWithSQlite
                 cbUserName.Items.AddRange(dTableUser.Rows[i].ItemArray);
             }
         }
+
+        //Кнопка добавления задачи
+        private void bnAddTask_Click(object sender, EventArgs e)
+        {
+            string sqlQuery = "INSERT INTO TaskList (Task, Project, Theme, Type, Priority, User, Description) values ('" +tbTaskName.Text+ "', '"+cbProjectName.SelectedItem.ToString()+"','"+tbTheme.Text+"','"+tbType.Text+"','"+tbPriority.Text+"','"+cbUserName.SelectedItem.ToString()+"','"+tbDescription.Text+"')";
+            try
+            {
+                dbCommand.CommandText = sqlQuery;
+                dbCommand.ExecuteNonQuery();
+                MessageBox.Show("Задача добавлена.");
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Ошибка: " + ex.Message);
+            }
+            this.Close();
+        }        
     }
 }

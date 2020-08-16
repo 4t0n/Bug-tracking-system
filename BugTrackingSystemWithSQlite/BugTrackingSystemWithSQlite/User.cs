@@ -25,7 +25,8 @@ namespace BugTrackingSystemWithSQlite
             this.dbConnect = dbConnect;
             this.dbCommand = dbCommand;
         }
-        //Добавление строк в БД
+
+        //Добавление пользователя
         public void AddNameUser(string tbUserName)
         {
             if (File.Exists(dbFileName))
@@ -45,7 +46,7 @@ namespace BugTrackingSystemWithSQlite
                 {
                     MessageBox.Show("Ошибка: " + ex.Message);
                 }
-                //dbConnect.Close();
+                dbConnect.Close();
             }
             else
             {

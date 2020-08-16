@@ -27,6 +27,7 @@ namespace BugTrackingSystemWithSQlite
             this.dbCommand = dbCommand;
         }        
 
+        //Заполнение списка задач
         private void FormDeleteTask_Load(object sender, EventArgs e)
         {
             dbConnect = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
@@ -48,18 +49,25 @@ namespace BugTrackingSystemWithSQlite
         //Кнопка удаления задачи
         private void bnDeleteTask_Click(object sender, EventArgs e)
         {
-            string sqlQuery = "DELETE FROM TaskList WHERE Task = '" + cbTaskNameForDelete.SelectedItem.ToString() + "'";
-            try
+            if (cbTaskNameForDelete.SelectedIndex >= 0)
             {
-                dbCommand.CommandText = sqlQuery;
-                dbCommand.ExecuteNonQuery();
-                MessageBox.Show("Задача удалена.");
+                string sqlQuery = "DELETE FROM TaskList WHERE Task = '" + cbTaskNameForDelete.SelectedItem.ToString() + "'";
+                try
+                {
+                    dbCommand.CommandText = sqlQuery;
+                    dbCommand.ExecuteNonQuery();
+                    MessageBox.Show("Задача удалена.");
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Ошибка: " + ex.Message);
+                }
+                this.Close();
             }
-            catch (SQLiteException ex)
+            else
             {
-                MessageBox.Show("Ошибка: " + ex.Message);
+                MessageBox.Show("Введите название задачи!");
             }
-            this.Close();
         }
     }
 }

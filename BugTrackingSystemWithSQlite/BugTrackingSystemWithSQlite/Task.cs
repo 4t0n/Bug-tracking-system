@@ -25,7 +25,8 @@ namespace BugTrackingSystemWithSQlite
             this.dbConnect = dbConnect;
             this.dbCommand = dbCommand;
         }
-        //Добавление строк в БД
+
+        //Вызов формы для добавления проекта
         public void AddNameTask()
         {
             if (File.Exists(dbFileName))
@@ -52,7 +53,7 @@ namespace BugTrackingSystemWithSQlite
                 MessageBox.Show("Необходимо создать или открыть файл базы данных!");
             }
         }
-
+        /*
         //Показать список проектов
         public void ShowTasks(DataGridView dgvViewer)
         {
@@ -107,7 +108,7 @@ namespace BugTrackingSystemWithSQlite
             {
                 MessageBox.Show("Ошибка: " + ex.Message);
             }
-        }
+        }*/
 
         //Показать список задач в выбранном проекте
         public void ShowTasksInProject(DataGridView dgvViewer, string cbTasksInProject)
@@ -165,7 +166,7 @@ namespace BugTrackingSystemWithSQlite
             }
         }
 
-        //Показать список задач в выбранном проекте
+        //Показать список задач на исполнителе
         public void ShowTasksOnUser(DataGridView dgvViewer, string cbTasksOnUser)
         {
             string sqlQuery;
