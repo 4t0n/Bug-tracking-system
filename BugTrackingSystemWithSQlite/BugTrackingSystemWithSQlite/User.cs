@@ -91,6 +91,8 @@ namespace BugTrackingSystemWithSQlite
                     dgvIdUser.Visible = false;
                     dgvViewer.Columns.Add(dgvIdUser);
                     dgvViewer.Columns.Add(dgvUser);
+                    dgvViewer.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    dgvViewer.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                     for (int i = 0; i < dTable.Rows.Count; i++)
                         dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
                 }

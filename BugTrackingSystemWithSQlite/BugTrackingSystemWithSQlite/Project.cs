@@ -39,7 +39,6 @@ namespace BugTrackingSystemWithSQlite
                 {
                     dbCommand.CommandText = "INSERT INTO ProjectList ('Project') values ('" +
                         tbProjectName + "')";
-
                     dbCommand.ExecuteNonQuery();
                 }
                 catch (SQLiteException ex)
@@ -91,6 +90,8 @@ namespace BugTrackingSystemWithSQlite
                     dgvIdProject.Visible = false;
                     dgvViewer.Columns.Add(dgvIdProject);
                     dgvViewer.Columns.Add(dgvProject);
+                    dgvViewer.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    dgvViewer.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                     for (int i = 0; i < dTable.Rows.Count; i++)
                         dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
                 }

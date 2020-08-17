@@ -54,6 +54,7 @@
             this.cbTasksOnUser = new System.Windows.Forms.ComboBox();
             this.lbProjectInTask = new System.Windows.Forms.Label();
             this.lbUserOnTask = new System.Windows.Forms.Label();
+            this.bnShowLogs = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewer)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gbProjects.SuspendLayout();
@@ -331,11 +332,22 @@
             this.lbUserOnTask.TabIndex = 21;
             this.lbUserOnTask.Text = "Имя исполнителя:";
             // 
+            // bnShowLogs
+            // 
+            this.bnShowLogs.Location = new System.Drawing.Point(782, 45);
+            this.bnShowLogs.Name = "bnShowLogs";
+            this.bnShowLogs.Size = new System.Drawing.Size(154, 42);
+            this.bnShowLogs.TabIndex = 22;
+            this.bnShowLogs.Text = "Показать историю";
+            this.bnShowLogs.UseVisualStyleBackColor = true;
+            this.bnShowLogs.Click += new System.EventHandler(this.bnShowLogs_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 487);
+            this.Controls.Add(this.bnShowLogs);
             this.Controls.Add(this.lbUserOnTask);
             this.Controls.Add(this.lbProjectInTask);
             this.Controls.Add(this.cbTasksOnUser);
@@ -393,6 +405,7 @@
         private System.Windows.Forms.ComboBox cbTasksOnUser;
         private System.Windows.Forms.Label lbProjectInTask;
         private System.Windows.Forms.Label lbUserOnTask;
+        private System.Windows.Forms.Button bnShowLogs;
     }
 }
 
